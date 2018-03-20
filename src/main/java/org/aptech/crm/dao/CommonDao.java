@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 public interface CommonDao <T,PK extends Serializable> {
 	/**
-	 * 添加实体
+	 * 添加实体111
 	 * @param entity
 	 * @return
 	 */
