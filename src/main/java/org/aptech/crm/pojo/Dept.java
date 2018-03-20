@@ -3,6 +3,7 @@ package org.aptech.crm.pojo;
 import java.io.Serializable;
 
 public class Dept implements Serializable {
+	
 	private Integer id;		//编号
 	
 	private String deptCode;	//部门编码

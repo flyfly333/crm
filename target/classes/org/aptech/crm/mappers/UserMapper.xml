@@ -10,7 +10,7 @@
 	</select>
 	
 	<!--添加用户  -->
-	<insert id="add" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+	<insert id="add" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="User">
 		INSERT INTO USER (username,user_code,PASSWORD,salt,sex,dept_id,post_id,phone,birthday,rntry_time,locked )
 		VALUES(#{username},#{userCode},#{password},#{salt},#{sex},#{dept.id},#{post.id},#{phone},#{birthday},#{rntryTime},#{locked})
 	</insert>
@@ -57,7 +57,7 @@
 	 	 from user 
 	 	 <include refid="conditionSql"></include>
 	 	 order by #{column} #{orderBy}
-	 	 limit #{start} #{limit}
+	 	 limit #{start} , #{limit}
 	 </select>
 	 
 	 <!-- 修改用户 -->
@@ -67,12 +67,19 @@
 	 </update>
 	 
 	 <!-- 删除方法 -->
-	 <delete id="batchDelete" parameterType="java.lang.reflect.Array">
+	 <delete id="deleteByIds" parameterType="java.lang.reflect.Array">
 	 	delete from user where id in 
 	 		<foreach collection="array" item="id" open="(" close=")" separator="," >
 	 			#{id}
 	 		</foreach>
 	 </delete>
+	 
+	 <!-- 添加用户关系 -->
+	 <insert id="addUserRole" >
+	 	INSERT INTO user_role(user_id,role_id)VALUES
+	 	<foreach collection="ids" item="id",separator=","></foreach>
+	 	(#{userId},#{id})
+	 </insert>
 	 
 	 <!-- 查询总条数 -->
 	 <select id="getCount" resultType="int">
