@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class User implements Serializable {
 	private Integer id;		//编号
 	
@@ -17,11 +19,14 @@ public class User implements Serializable {
 	
 	private Dept dept;		//部门
 	
-	private Post post;		//职位
+	private Post post;	    //职位
 	
 	private String phone;	//电话
 	
-	private Date brithbay;	//出生日期
+	@JSONField(format="yyyy-hh-dd")
+	private Date birthday;	//出生日期
+	
+	private List<Role> roles;
 	
 	private Date rntryTime;	//入职日期
 	
@@ -32,8 +37,27 @@ public class User implements Serializable {
 	private String salt;	//盐值
 
 	public Integer getId() {
+		
 		return id;
 	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
 
 	public void setId(Integer id) {
 		this.id = id;
@@ -94,15 +118,7 @@ public class User implements Serializable {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
-	public Date getBrithbay() {
-		return brithbay;
-	}
-
-	public void setBrithbay(Date brithbay) {
-		this.brithbay = brithbay;
-	}
-
+	
 	public Date getRntryTime() {
 		return rntryTime;
 	}
@@ -138,9 +154,8 @@ public class User implements Serializable {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", userCode=" + userCode + ", userName=" + userName + ", password=" + password
-				+ ", sex=" + sex + ", dept=" + dept + ", post=" + post + ", phone=" + phone + ", brithbay=" + brithbay
-				+ ", rntryTime=" + rntryTime + ", contactRecords=" + contactRecords + ", locked=" + locked + ", salt="
-				+ salt + "]";
+				+ ", sex=" + sex + ", dept=" + dept + ", post=" + post + ", phone=" + phone + ", birthday=" + birthday
+				+ ", rntryTime=" + rntryTime + ", contactRecords=" + contactRecords + ", locked=" + locked + "]";
 	}
 
 }
