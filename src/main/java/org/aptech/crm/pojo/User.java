@@ -28,6 +28,8 @@ public class User implements Serializable {
 	private List<ContactRecord> contactRecords;		//交往记录和用户关系表（多对多交往记录的实体类集合）
 	
 	private Integer locked;	//是否锁定（0不可用，1是可用）
+	
+	private String salt;	//盐值
 
 	public Integer getId() {
 		return id;
@@ -125,11 +127,20 @@ public class User implements Serializable {
 		this.locked = locked;
 	}
 
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", userCode=" + userCode + ", userName=" + userName + ", password=" + password
 				+ ", sex=" + sex + ", dept=" + dept + ", post=" + post + ", phone=" + phone + ", brithbay=" + brithbay
-				+ ", rntryTime=" + rntryTime + ", contactRecords=" + contactRecords + ", locked=" + locked + "]";
+				+ ", rntryTime=" + rntryTime + ", contactRecords=" + contactRecords + ", locked=" + locked + ", salt="
+				+ salt + "]";
 	}
 
 }
