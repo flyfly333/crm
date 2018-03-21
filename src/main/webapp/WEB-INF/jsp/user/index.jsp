@@ -89,7 +89,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						 }
 					 })
 				 }
-				 
 			 },{
 				 iconCls:'icon-cancel',
 				 text:'取消',

@@ -10,9 +10,7 @@ public class User implements Serializable {
 	private Integer id;		//编号
 	
 	private String userCode;	//用户编码
-	
-	private String salt;        //盐值
-	
+	 
 	private String userName;	//账号
 	
 	private String password;	//密码
@@ -35,10 +33,13 @@ public class User implements Serializable {
 	private List<ContactRecord> contactRecords;		//交往记录和用户关系表（多对多交往记录的实体类集合）
 	
 	private Integer locked;	//是否锁定（0不可用，1是可用）
+	
+	private String salt;	//盐值
 
 	 
 
-	public Integer getId() {
+public Integer getId() {
+		
 		return id;
 	}
 
@@ -47,11 +48,17 @@ public class User implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	public Date getBirthday() {
+		return birthday;
+	}
 
 
 
 	public String getUserCode() {
 		return userCode;
+	}
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
 	}
 
 
@@ -144,17 +151,7 @@ public class User implements Serializable {
 		this.phone = phone;
 	}
 
-
-
-	public Date getBirthday() {
-		return birthday;
-	}
-
-
-
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
+ 
 
 
 
@@ -167,9 +164,7 @@ public class User implements Serializable {
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
-
-
-
+ 
 	public Date getRntryTime() {
 		return rntryTime;
 	}
@@ -203,14 +198,14 @@ public class User implements Serializable {
 	public void setLocked(Integer locked) {
 		this.locked = locked;
 	}
-
-
-
+ 
+	 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", userCode=" + userCode + ", userName=" + userName + ", password=" + password
 				+ ", sex=" + sex + ", dept=" + dept + ", post=" + post + ", phone=" + phone + ", birthday=" + birthday
 				+ ", rntryTime=" + rntryTime + ", contactRecords=" + contactRecords + ", locked=" + locked + "]";
+ 
 	}
 
 }

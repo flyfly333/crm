@@ -12,7 +12,7 @@
 	<!--添加用户  -->
 	<insert id="add" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="User">
 		INSERT INTO USER (username,user_code,PASSWORD,salt,sex,dept_id,post_id,phone,birthday,rntry_time,locked )
-		VALUES(#{username},#{userCode},#{password},#{salt},#{sex},#{dept.id},#{post.id},#{phone},#{birthday},#{rntryTime},#{locked})
+		VALUES(#{userName},#{userCode},#{password},#{salt},#{sex},#{dept.id},#{post.id},#{phone},#{birthday},#{rntryTime},#{locked})
 	</insert>
 	
 	<!-- 用户映射 -->
@@ -74,15 +74,14 @@
 	 		</foreach>
 	 </delete>
 	 
+	 
 	 <!-- 添加用户关系 -->
-	 <insert id="addUserRole" >
-	 	INSERT INTO user_role(user_id,role_id)VALUES
-	 	 
+	<!--  <insert id="addUserRole" parameterType="java.lang.reflect.Array">
+	 	INSERT INTO user_role(user_id,role_id) VALUES 
 	 	<foreach collection="array" item="id" separator="," >
 	 			(#{userId},#{id})
-	 		</foreach>
-	 	
-	 </insert>
+	 	</foreach>
+	 </insert>  -->
 	 
 	 <!-- 查询总条数 -->
 	 <select id="getCount" resultType="int">
