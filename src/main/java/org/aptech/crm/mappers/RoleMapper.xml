@@ -36,8 +36,22 @@
 		VALUES(#{name},#{available})
 	</insert>
  	 
+ 	 <!-- 修改角色 -->
+ 	 <update id="update" parameterType="Role">
+ 	 	UPDATE role SET NAME = #{name} , available = #{available} 
+ 	 	where id = #{id}
+ 	 </update>
+ 	 
+ 	 <!-- 批量删除 -->
+ 	 <delete id="deleteByIds" parameterType="java.lang.reflect.Array">
+ 	 	delete from role where id in 
+ 	 	<foreach collection="array" item="id" open="(" close=")" separator="," >
+ 	 		#{id}
+ 	 	</foreach>
+ 	 	
+ 	 </delete>
 	 <!-- 查询总条数 -->
-	 <select id="getCount" resultType="int">
+	 <select id="getCountByCondition" resultType="int" parameterType="Role">
 	 	select count(1) from role
 	 	<include refid="conditionSql"></include>
 	 </select>

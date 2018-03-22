@@ -3,7 +3,7 @@ import java.util.List;
 
 import org.aptech.crm.pojo.Post;
 /**
- * 用户dao接口  
+ * 职位dao接口  
  */
 public interface PostDao extends CommonDao<Post, Integer> {
 

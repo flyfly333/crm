@@ -1,6 +1,7 @@
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\controller\DeptController.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\Diction.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\Complain.java
+F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\dao\PermissionDao.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\Dept.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\Memo.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\ContactRecord.java
@@ -14,6 +15,7 @@ F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\Permission.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\Trade.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\User.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\Linkman.java
+F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\controller\PermissionController.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\dao\PostDao.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\Log.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\CustomCare.java

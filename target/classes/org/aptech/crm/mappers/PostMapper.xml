@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.aptech.crm.dao.PostDao">
-	<!-- <insert id="add" parameterType="org.aptech.crm.pojo.Post"
+		<!-- <insert id="add" parameterType="org.aptech.crm.pojo.Post"
 		useGeneratedKeys="true" keyColumn="id" keyProperty="id">
 		insert into Post(id,postName,postDesc,dept)
 			values(  #{id},  #{postName},  #{postDesc},  #{dept}  )
