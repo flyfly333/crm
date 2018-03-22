@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.aptech.crm.dao.AddressDao">
+	<select id="getById" parameterType="int" resultType="org.aptech.crm.pojo.Address">
+		select * from address where id = #{id}
+	</select>
+	
+	<select id="getProvinceAll" resultType="org.aptech.crm.pojo.Address">
+		select * from address where parent_id = #{parentId}
+	</select>
+	
+	<select id="getCityAll" resultType="org.aptech.crm.pojo.Address">
+		select * from address where id = #{id}
+	</select>
+</mapper>
