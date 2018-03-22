@@ -1,6 +1,9 @@
 ﻿package org.aptech.crm.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
+
+import com.alibaba.fastjson.annotation.JSONField;
 
 public class Custom implements Serializable {
 	private Integer id;		//客户编号
@@ -19,7 +22,7 @@ public class Custom implements Serializable {
 	
 	private String customSummary;	//公司简介
 	
-	private String customAssess;	//客户价值评估
+	private Integer customAssess;	//客户价值评估
 	
 	private String customCreditGrade;	//客户信用等级
 	
@@ -40,6 +43,9 @@ public class Custom implements Serializable {
 	private String customAddress;	//详细地址
 	
 	private String customRemark;	//备注
+	
+	@JSONField(format="yyyy-hh-dd HH:mm:ss")
+	private Date createTime;		//创建时间
 	
 	private User user;		//用户实体类（跟踪进行项目的用户）
 
@@ -107,11 +113,11 @@ public class Custom implements Serializable {
 		this.customSummary = customSummary;
 	}
 
-	public String getCustomAssess() {
+	public Integer getCustomAssess() {
 		return customAssess;
 	}
 
-	public void setCustomAssess(String customAssess) {
+	public void setCustomAssess(Integer customAssess) {
 		this.customAssess = customAssess;
 	}
 
@@ -195,6 +201,14 @@ public class Custom implements Serializable {
 		this.customRemark = customRemark;
 	}
 
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -211,9 +225,7 @@ public class Custom implements Serializable {
 				+ customCreditGrade + ", customRelaGrade=" + customRelaGrade + ", customSource=" + customSource
 				+ ", address=" + address + ", customZipCode=" + customZipCode + ", customPhone=" + customPhone
 				+ ", customFax=" + customFax + ", customUrl=" + customUrl + ", customAddress=" + customAddress
-				+ ", customRemark=" + customRemark + ", user=" + user + "]";
+				+ ", customRemark=" + customRemark + ", createTime=" + createTime + ", user=" + user + "]";
 	}
-	
-	
 	
 }
