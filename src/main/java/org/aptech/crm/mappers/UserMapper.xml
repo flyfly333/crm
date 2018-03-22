@@ -18,6 +18,8 @@
 	<!-- 用户映射 -->
 	<resultMap type="User" id="userMap" autoMapping="true" >
 		<id column="id" property="id"/>
+		<association property="dept" javaType="org.aptech.crm.pojo.Dept" column="dept_id" select="org.aptech.crm.dao.DeptDao.getById"></association>
+		<association property="post" javaType="org.aptech.crm.pojo.Post" column="post_id" select="org.aptech.crm.dao.PostDao.getById"></association>
 		<collection property="roles" javaType="java.util.List" ofType="Role" column="id" select="getRolesByUserId" ></collection>
 	</resultMap>
 	
@@ -62,7 +64,7 @@
 	 
 	 <!-- 修改用户 -->
 	 <update id="update" parameterType="User"> 
-			UPDATE USER SET username = #{username},user_code = #{userCode},PASSWORD = #{password},salt = #{salt},sex = #{sex},dept_id = #{dept.id},post_id = #{post.id},phone = #{phone},birthday=#{birthday},rntry_time=#{rntryTime}, locked = #{locked} 
+			UPDATE USER SET username = #{userName},user_code = #{userCode},PASSWORD = #{password},salt = #{salt},sex = #{sex},dept_id = #{dept.id},post_id = #{post.id},phone = #{phone},birthday=#{birthday},rntry_time=#{rntryTime}, locked = #{locked} 
 			WHERE id = #{id} 
 	 </update>
 	 
@@ -76,12 +78,17 @@
 	 
 	 
 	 <!-- 添加用户关系 -->
-	<!--  <insert id="addUserRole" parameterType="java.lang.reflect.Array">
+	   <insert id="addUserRole" parameterType="java.lang.reflect.Array">
 	 	INSERT INTO user_role(user_id,role_id) VALUES 
-	 	<foreach collection="array" item="id" separator="," >
+	 	<foreach collection="rids" item="id" separator="," >
 	 			(#{userId},#{id})
 	 	</foreach>
-	 </insert>  -->
+	 </insert>   
+	 
+	 <!-- 删除用户关系 -->
+	 <delete id="deleteRela" parameterType="int" >
+	 	 DELETE FROM user_role WHERE user_id = #{userId}
+	 </delete>
 	 
 	 <!-- 查询总条数 -->
 	 <select id="getCount" resultType="int">

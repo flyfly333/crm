@@ -1,4 +1,4 @@
-package org.aptech.crm.pojo;
+﻿package org.aptech.crm.pojo;
 
 import java.io.Serializable;
 
