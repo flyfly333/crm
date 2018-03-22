@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream; 
 import javax.annotation.Resource; 
-import javax.enterprise.inject.Default; 
+import javax.enterprise.inject.Default;
+
+import org.apache.ibatis.annotations.Update;
 import org.apache.shiro.crypto.hash.Md5Hash;  
 import org.aptech.crm.dao.UserDao;
 import org.aptech.crm.pojo.User;
@@ -15,8 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * 用户控制器
- * @author Miao  Long
- *
+ * @author Miao  Long 
  */
 @Controller
 @RequestMapping("/user")
@@ -24,7 +25,7 @@ public class UserController {
 	@Resource
 	private UserDao userDao;
 	
- 
+  
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
@@ -32,6 +33,13 @@ public class UserController {
 	@RequestMapping("/index")
 	public String index() {
 		return "user/index";
+	}
+	
+	@RequestMapping("/getUserById")
+	@ResponseBody
+	public User getUserById(Integer id) {
+		System.out.println(userDao.getById(id));
+		return userDao.getById(id);
 	}
 	
 	@RequestMapping("/batchDelete")
@@ -69,9 +77,22 @@ public class UserController {
 		System.out.println(user.getUserName());
 		System.out.println();
 		int start = (page - 1)*rows;
-		Map<String, Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>();
 		map.put("total",userDao.getCount());
 		map.put("rows",userDao.getListByCondition(start, rows,user, sort, order));
+		return map;
+	}
+	@RequestMapping("/edit")
+	@ResponseBody
+	public Map<String, Object> Update(User user,Integer [] rids){
+		for (Integer integer : rids) {
+			System.out.println(integer);
+		}
+		Map<String, Object> map = new HashMap<>();
+		userDao.update(user);
+		userDao.deleteRela(user.getId());
+		userDao.addUserRole(user.getId(), rids);
+		map.put("result", true);
 		return map;
 	}
 	

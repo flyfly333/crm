@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 org\aptech\crm\pojo\Dept.class
 org\aptech\crm\pojo\Role.class
 org\aptech\crm\pojo\Memo.class
@@ -26,3 +27,5 @@ org\aptech\crm\pojo\Trade.class
 org\aptech\crm\pojo\WorkTalk.class
 org\aptech\crm\controller\UserController.class
 org\aptech\crm\pojo\User.class
+=======
+>>>>>>> branch 'master' of git@github.com:flyfly333/crm.git

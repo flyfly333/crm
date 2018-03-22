@@ -198,14 +198,18 @@ public Integer getId() {
 	public void setLocked(Integer locked) {
 		this.locked = locked;
 	}
- 
-	 
+
+
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", userCode=" + userCode + ", userName=" + userName + ", password=" + password
 				+ ", sex=" + sex + ", dept=" + dept + ", post=" + post + ", phone=" + phone + ", birthday=" + birthday
-				+ ", rntryTime=" + rntryTime + ", contactRecords=" + contactRecords + ", locked=" + locked + "]";
- 
+				+ ", roles=" + roles + ", rntryTime=" + rntryTime + ", contactRecords=" + contactRecords + ", locked="
+				+ locked + ", salt=" + salt + "]";
 	}
+ 
+	 
+	
 
 }

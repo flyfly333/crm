@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.aptech.crm.dao.PostDao">
+	<!-- <insert id="add" parameterType="org.aptech.crm.pojo.Post"
+		useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		insert into Post(id,postName,postDesc,dept)
+			values(  #{id},  #{postName},  #{postDesc},  #{dept}  )
+	</insert>
+	
+	<update id="update" parameterType="org.aptech.crm.pojo.Post">
+		update Post set id = #{id},postName = #{postName},postDesc = #{postDesc},dept = #{dept}
+			where id = #{id}
+	</update> -->
+	
+	<delete id="deleteByIds" parameterType="java.lang.reflect.Array">
+		delete from Post where id in
+		<foreach collection="array" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!-- 根据部门获取所有职位 -->
+	<select id="getPostByDeptId" parameterType="int" resultType="Post">
+		SELECT * FROM post WHERE dept_id = #{id}
+	</select>
+
+	<sql id="conditionSql">
+		<if test="condition != null">
+			<where>
+			</where>
+		</if>
+	</sql>
+	
+	<select id="getAll" resultType="org.aptech.crm.pojo.Post">
+		select * from Post
+	</select>
+	
+	<select id="getById" parameterType="int" resultType="org.aptech.crm.pojo.Post">
+		select * from Post where id = #{id}
+	</select>
+	
+	<select id="getListByCondition" resultType="org.aptech.crm.pojo.Post">
+		select * from Post
+			<include refid="conditionSql"></include>
+		order by ${column} ${orderBy}
+			limit #{start},#{limit}
+	</select>
+	<select id="getCountByCondition" resultType="int">
+		select count(1) from Post
+			<include refid="conditionSql"></include>
+	</select>
+</mapper>
