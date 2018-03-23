@@ -25,9 +25,24 @@ public class Dept implements Serializable {
 	
 	private String remark;		//备注
 
+	private Integer parentid;  //父级的部门id
 	
-	
-	
+	 
+	public Integer getParentid() {
+		return parentid;
+	}
+
+
+
+
+
+	public void setParentid(Integer parentid) {
+		this.parentid = parentid;
+	}
+
+
+
+
 
 	public Integer getId() {
 		return id;
@@ -191,10 +206,16 @@ public class Dept implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Dept [id=" + id + ", deptCode=" + deptCode + ", text=" + text + ", children=" + children + ", deptPrincipal="
-				+ deptPrincipal + ", deptPhone=" + deptPhone + ", deptFax=" + deptFax + ", daptType=" + daptType
-				+ ", remark=" + remark + "]";
+		return "Dept [id=" + id + ", deptCode=" + deptCode + ", text=" + text + ", dept=" + dept + ", children="
+				+ children + ", deptPrincipal=" + deptPrincipal + ", deptPhone=" + deptPhone + ", deptFax=" + deptFax
+				+ ", daptType=" + daptType + ", remark=" + remark + "]";
 	}
+
+
+
+
+
+	 
 
 	 
 	

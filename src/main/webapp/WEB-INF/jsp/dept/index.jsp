@@ -47,12 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		if (row == null) {
 			alert("请选择部门！");
 			return;
-		}
-		/* if (row.children.length > 0) {
-			alert("该部门还有子部门不能删除！");
-			return;
-		} */
-		 
+		} 
 		var d = $("<div></div>").appendTo("body");
 		d.dialog({
 			title:'修改部门',
@@ -64,11 +59,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			onLoad:function (){
 				$.post("dept/getById",{id:row.id},function (data){
 					var parentid = 0;
-					if (data.per != null) {
-						parentid = data.per.id;
-					} 
+					if (data.parentid >= 0) {
+						parentid = data.parentid;
+					}   
 					//设置父级的选项
-					$('#perParent').combotree('setValue',parentid); 
+					$('#deptParent').combotree('setValue',parentid); 
 					$("#deptForm").form("load",data); 
 				}) 
 			},
@@ -132,6 +127,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						success:function (data){
 							console.log(data);
 							alert("添加成功！");
+							$("#deptTable").treegrid("reload");
 						}
 						
 					})
@@ -162,9 +158,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			idField:"id",
 			treeField:"text",
 			animate:true,
-			onLoadSuccess : function(){
-				//$(this).treegrid("collapseAll");
-			},
 			loadFilter:function(data){
 				 $.each(data,function (){
 					 this.state = "closed";
@@ -177,7 +170,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 	<table id="deptTable"  title="dept List"
-        data-options="url:'dept/list',fitColumns:true,striped:true,iconCls:'icon-search'">
+        data-options="url:'dept/list2',fitColumns:true,striped:true,iconCls:'icon-search'">
     <thead>
         <tr> 
             <th data-options="field:'text',width:100,sortable:true">部门名称</th>

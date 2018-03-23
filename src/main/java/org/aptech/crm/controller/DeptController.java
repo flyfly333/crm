@@ -34,6 +34,7 @@ public class DeptController {
 	@RequestMapping("/getById")
 	@ResponseBody
 	public Dept getById(Integer id) {
+		System.out.println(deptDao.getById(id));
 		return deptDao.getById(id);
 	}
 	
@@ -41,9 +42,18 @@ public class DeptController {
 	@RequestMapping("/list")
 	@ResponseBody
 	public List<Dept> list(){
+		List<Dept> list = deptDao.getAll();
+		Dept dept = new Dept();
+		dept.setId(0);
+		dept.setText("顶级权限");
+		list.add(0, dept);
+		return list;
+	}
+	@RequestMapping("/list2")
+	@ResponseBody
+	public List<Dept> list2(){ 
 		return deptDao.getAll();
 	}
-	
 	@RequestMapping("/form")
 	public String Form() {
 		return "dept/dept_form";
@@ -63,6 +73,7 @@ public class DeptController {
 	@RequestMapping("/update")
 	@ResponseBody
 	public Map<String, Object> update(Dept dept){
+		System.out.println(dept);
 		Map<String, Object> map = new HashMap<>();
 		System.out.println(dept);
 		deptDao.update(dept); 
