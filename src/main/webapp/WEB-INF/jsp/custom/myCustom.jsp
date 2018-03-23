@@ -23,8 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			})
 			
 			function setCondition(){
-				var customname = {customname : $("#customname").val()};
-				var customCtage = $("#customCtage").combobox("getValue");
+				var postData = {customName : $("#customName").val(),customCtage : $("#customCtage").combobox("getValue")};
 				
 				
 				$("#customTable").datagrid("reload",postData);
@@ -71,7 +70,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<h1>我的客户</h1>
 		<form id="customCondition">
 			<div class="easyui-panel" title="设置查询条件" style="padding:15px 10px;">
-				客户名称 : <input type="text" name="customname" id="customname" />
+				客户名称 : <input type="text" name="customName" id="customName" />
 				客户阶段 : 
 				<select class="easyui-combobox" id="customCtage" name="customCtage" style="width:100px;">
 					<option style="height: 15px;" value="">&nbsp;</option>

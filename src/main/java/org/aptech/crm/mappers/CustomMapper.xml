@@ -19,10 +19,10 @@
 	<sql id="conditionSql">
 		<if test="condition != null">
 			<where>
-				<if test="condition.customname != null and condition.customname != ''">
-					custom_name like concat('%',#{condition.custom},'%')
+				<if test="condition.customName != null and condition.customName != ''">
+					custom_name like concat('%',#{condition.customName},'%')
 				</if>
-				<if test="condition.customCtage != null and condition.customCtage.size != ''">
+				<if test="condition.customCtage != null and condition.customCtage != ''">
 					custom_ctage like concat('%',#{condition.customCtage},'%')
 				</if>
 				<!-- <if test="startTime != null">

@@ -12,13 +12,13 @@ public class Dept implements Serializable {
 	
 	private Dept dept;		//父级实体类
 	
-	private String daptPrincipal;	//部门负责人
+	private String deptPrincipal;	//部门负责人
 	
 	private String deptPhone;		//部门电话
 	
 	private String deptFax;		//部门传真
 	
-	private String daptType;	//部门类型
+	private String deptType;	//部门类型
 	
 	private String remark;		//备注
 
@@ -54,14 +54,6 @@ public class Dept implements Serializable {
 		this.dept = dept;
 	}
 
-	public String getDaptPrincipal() {
-		return daptPrincipal;
-	}
-
-	public void setDaptPrincipal(String daptPrincipal) {
-		this.daptPrincipal = daptPrincipal;
-	}
-
 	public String getDeptPhone() {
 		return deptPhone;
 	}
@@ -78,12 +70,20 @@ public class Dept implements Serializable {
 		this.deptFax = deptFax;
 	}
 
-	public String getDaptType() {
-		return daptType;
+	public String getDeptPrincipal() {
+		return deptPrincipal;
 	}
 
-	public void setDaptType(String daptType) {
-		this.daptType = daptType;
+	public void setDeptPrincipal(String deptPrincipal) {
+		this.deptPrincipal = deptPrincipal;
+	}
+
+	public String getDeptType() {
+		return deptType;
+	}
+
+	public void setDeptType(String deptType) {
+		this.deptType = deptType;
 	}
 
 	public String getRemark() {
@@ -97,8 +97,8 @@ public class Dept implements Serializable {
 	@Override
 	public String toString() {
 		return "Dept [id=" + id + ", deptCode=" + deptCode + ", deptName=" + deptName + ", dept=" + dept
-				+ ", daptPrincipal=" + daptPrincipal + ", deptPhone=" + deptPhone + ", deptFax=" + deptFax
-				+ ", daptType=" + daptType + ", remark=" + remark + "]";
+				+ ", deptPrincipal=" + deptPrincipal + ", deptPhone=" + deptPhone + ", deptFax=" + deptFax
+				+ ", deptType=" + deptType + ", remark=" + remark + "]";
 	}
 	
 }
