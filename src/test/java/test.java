@@ -28,11 +28,11 @@ public class test {
 //			System.out.println(custom);
 //		}
 //		System.out.println(custom);
-//		for(int i = 1; i <= 6; i++) {
-//			Custom custom = customDao.getById(1);
-//			customDao.add(custom);
-//			System.out.println(i);
-//		}
+		for(int i = 1; i <= 6; i++) {
+			Custom custom = customDao.getById(1);
+			customDao.add(custom);
+			System.out.println(i);
+		}
 //		Integer[] ids = {7,6,5};
 //		customDao.deleteByIds(ids);
 	}

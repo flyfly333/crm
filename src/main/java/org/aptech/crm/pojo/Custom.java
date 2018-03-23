@@ -1,4 +1,4 @@
-﻿package org.aptech.crm.pojo;
+package org.aptech.crm.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,7 +14,7 @@ public class Custom implements Serializable {
 	
 	private String customType;	//客户种类
 	
-	private Trade trade;		//行业实体类
+	private String trade;		//行业实体类
 	
 	private String customScale;	//规模（多少人）
 	
@@ -26,7 +26,7 @@ public class Custom implements Serializable {
 	
 	private String customCreditGrade;	//客户信用等级
 	
-	private String  customRelaGrade;	//客户管理等级
+	private String  customRelaGrade;	//客户关系等级
 	
 	private String customSource;	//客户来源
 	
@@ -81,11 +81,11 @@ public class Custom implements Serializable {
 		this.customType = customType;
 	}
 
-	public Trade getTrade() {
+	public String getTrade() {
 		return trade;
 	}
 
-	public void setTrade(Trade trade) {
+	public void setTrade(String trade) {
 		this.trade = trade;
 	}
 

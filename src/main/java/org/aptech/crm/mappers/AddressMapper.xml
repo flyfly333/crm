@@ -12,4 +12,8 @@
 	<select id="getCityAll" resultType="org.aptech.crm.pojo.Address">
 		select * from address where id = #{id}
 	</select>
+	
+	<select id="getCounty" resultType="org.aptech.crm.pojo.Address">
+		select * from address where id = #{id}
+	</select>
 </mapper>
