@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.aptech.crm.dao.PostDao">
-		<!-- <insert id="add" parameterType="org.aptech.crm.pojo.Post"
+		 
+	<!-- 添加方法 -->
+		 <insert id="add" parameterType="org.aptech.crm.pojo.Post"
 		useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-		insert into Post(id,postName,postDesc,dept)
-			values(  #{id},  #{postName},  #{postDesc},  #{dept}  )
+		insert into Post( post_name,post_desc,dept_id)
+			values( #{postName},  #{postDesc},  #{dept.id}  )
 	</insert>
-	
+	 
 	<update id="update" parameterType="org.aptech.crm.pojo.Post">
-		update Post set id = #{id},postName = #{postName},postDesc = #{postDesc},dept = #{dept}
+		update Post set post_name = #{postName},post_desc = #{postDesc},dept_id = #{dept.id}
 			where id = #{id}
-	</update> -->
+	</update>  
 	
 	<delete id="deleteByIds" parameterType="java.lang.reflect.Array">
 		delete from Post where id in
@@ -27,6 +29,10 @@
 	<sql id="conditionSql">
 		<if test="condition != null">
 			<where>
+				<if test="condition.postName != null and condition.postName != ''">
+					post_name like concat('%',#{condition.postName},'%')
+				</if>
+				
 			</where>
 		</if>
 	</sql>
@@ -35,15 +41,23 @@
 		select * from Post
 	</select>
 	
-	<select id="getById" parameterType="int" resultType="org.aptech.crm.pojo.Post">
+	<select id="getById" parameterType="int" resultMap="postMap">
 		select * from Post where id = #{id}
 	</select>
 	
-	<select id="getListByCondition" resultType="org.aptech.crm.pojo.Post">
+	<!-- 职位映射 -->
+	<resultMap type="Post" id="postMap">
+		<id column="id" property="id"/>
+		<association property="dept" column="dept_id" select="org.aptech.crm.dao.DeptDao.getById"></association>
+	</resultMap>
+	
+	
+	
+	<select id="getListByCondition" resultMap="postMap">
 		select * from Post
-			<include refid="conditionSql"></include>
+	    <include refid="conditionSql"></include>
 		order by ${column} ${orderBy}
-			limit #{start},#{limit}
+		limit #{start},#{limit}
 	</select>
 	<select id="getCountByCondition" resultType="int">
 		select count(1) from Post

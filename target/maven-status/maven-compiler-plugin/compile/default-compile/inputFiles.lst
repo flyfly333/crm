@@ -6,6 +6,8 @@ F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\Dept.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\Memo.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\ContactRecord.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\Question.java
+F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\dao\TradeDao.java
+F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\controller\CustomController.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\utils\TestGenerate.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\Custom.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\Address.java
@@ -24,6 +26,7 @@ F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\Role.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\controller\UserController.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\dao\RoleDao.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\Post.java
+F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\dao\AddressDao.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\Accessory.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\dao\UserDao.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\TalkComment.java
@@ -32,3 +35,4 @@ F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\utils\InitListener.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\utils\ProjectUtils.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\controller\PostController.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\dao\CommonDao.java
+F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\dao\CustomDao.java

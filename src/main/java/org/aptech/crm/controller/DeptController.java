@@ -23,6 +23,11 @@ public class DeptController {
 	@RequestMapping("/all")
 	@ResponseBody
 	public List<Dept> getAll(){
+		for (Dept dept : deptDao.getAll()) {
+			System.out.println("123");
+			System.out.println(dept);
+			//System.out.println(dept.getChildren().size());
+		}
 		return deptDao.getAll();
 	}
 	

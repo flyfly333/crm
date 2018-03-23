@@ -4,7 +4,7 @@
 	<script type="text/javascript" src = "/easyui/jquery.easyui.min.js" ></script>
 	<script type="text/javascript" src = "/easyui/locale/easyui-lang-zh_CN.js"></script>
 	<style type="text/css">
-		#condition,#roleCondition{
+		#condition,#roleCondition,#postCondition{
 			padding:15px 10px;
 		}
 		.item{

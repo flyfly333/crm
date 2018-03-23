@@ -38,10 +38,19 @@
 		select count(1) from Dept
 			<include refid="conditionSql"></include>
 	</select>-->
-	<select id="getById" parameterType="int" resultType="org.aptech.crm.pojo.Dept">
-		select * from Dept where id = #{id}
+	
+	<select id="getById" parameterType="int" resultType="Dept">
+		select *,dept_name text from Dept where id = #{id}
 	</select>
-	<select id="getAll" resultType="org.aptech.crm.pojo.Dept">
-		select * from Dept
+	
+	<select id="getByParentId" parameterType="int" resultMap="deptMapper">
+		select *,dept_name text from Dept where parentid = #{id}
+	</select>
+	<resultMap type="Dept" id="deptMapper">
+		<id column="id" property="id"/>
+		<collection property="children" column="id" javaType="java.util.List" ofType="Dept" select="getByParentId"></collection>
+	</resultMap>
+	<select id="getAll" resultMap="deptMapper">
+		SELECT *,dept_name TEXT FROM Dept where parentid is null
 	</select>
 </mapper>
