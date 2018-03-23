@@ -17,4 +17,6 @@ public interface AddressDao extends CommonDao<Address, Integer> {
 	 * @return
 	 */
 	public List<Address> getCityAll(Integer id);
+	
+	public List<Address> getCounty(Integer id);
 }

@@ -49,8 +49,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<th data-options = "field:'userCode',width:40">用户编码</th>
 			<th data-options = "field:'salt',width:50">盐值</th>
 			<th data-options = "field:'phone',width:40">电话</th>
-			<th data-options = "field:'dept',width:50">部门</th>
-			<th data-options = "field:'post',width:50">职位</th>
+			<th data-options = "field:'dept1',width:50,formatter:deptFormatter">部门</th>
+			<th data-options = "field:'post',width:50,formatter:postFormatter">职位</th>
 			<th data-options = "field:'roles',width:120,formatter:roleFormatter">角色</th> 
 		</thead>
 	   <tbody>
@@ -64,15 +64,91 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <a href="javascript:void(0)" class="easyui-linkbutton" onclick = "export_user()" data-options="iconCls:'icon-sum',plain:true">导出</a>
 </div>
 <script type="text/javascript">
-		 
-		 
+
+	//返回部门名称
+	function deptFormatter(value,row,index){
+		if (row != null) {
+			return row.dept.deptName;
+		}else{
+			return "-";
+		}
+	}
+	//返回职位名称
+	function postFormatter(value,row,index){
+		if (row != null) {
+			return row.post.postName;
+		}else{
+			return "-";
+		}
+	}
+	//修改用户方法
+	function edit_user(){
+		var row = $("#dataGrid").datagrid("getSelected");
+		if (row == null) {
+			alert("请选择用户!");
+			return;
+		}
+		//选中最多的只保留最先选中的
+		$("#dataGrid").datagrid("clearSelections");
+		$("#dataGrid").datagrid("selectRecord",row.id);
+		var d = $("<div></div>").appendTo("body");
+		d.dialog({
+			title:'修改用户',
+			width:500,
+			height:'auto',
+			modal:true,
+			href:'user/form',
+			onClose:function (){ $(this).dialog("destroy"); },
+			onLoad:function (){ 
+				$.post("user/getUserById",{id:row.id},function (data){
+					console.log(data);
+					$("#userForm").form("load",data);
+					var rids = new Array();
+					$.each(data.roles,function (){
+						rids.push(this.id); 
+					});
+					$("#rids").combobox("setValues",rids);
+					$("#post").combobox("setValue",data.post.id);
+					$("#dept").combobox("setValue",data.dept.id);
+				})
+			},
+			buttons:[{
+				iconCls:"icon-ok",
+				text:"确定",
+				handler:function(){
+					$("#userForm").form("submit",{
+						url : "user/edit",
+						success : function(data){ 
+							console.log(data);
+							d.dialog("close");
+							$("#dataGrid").datagrid("reload");
+							alert("修改成功！");
+						}
+					});
+				}
+			},{
+				iconCls:"icon-cancel",
+				text:"取消",
+				handler:function(){
+					d.dialog("close");
+					$("#dataGrid").datagrid("clearSelections");
+				}
+			}]
+			 
+		})
+	}
+	
+	//部门下拉框改变事件
+	function change(newValue,oldValue){
+		$('#post').combobox('reload','post/getPostByDeptId?deptId='+newValue);  
+	}
 	//添加方法
 	function add_user(){
 		 var d = $("<div></div>").appendTo("body");
 		 d.dialog({
 			 title:'添加用户',
 			 width:500,
-			 height:'auto',
+			 height:500,
 			 modal:true,
 			 href:'user/form',
 			 onClose:function (){ $(this).dialog("destroy");},
@@ -224,8 +300,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			width:'auto',
 			hasDownArrow:true,
 			panelMinWidth:150
-		});
-		
+		}); 
 	</script>	  
 </body>
 </html>
