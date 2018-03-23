@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.aptech.crm.dao.PermissionDao">
+	<insert id="add" parameterType="org.aptech.crm.pojo.Permission"
+		useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		insert into Permission(name,type,url,percode,sortstring,available,parentid )
+			values( #{text},  #{type},  #{url},  #{percode},#{sortstring},#{available},#{per.id})
+	</insert>
+	
+	<update id="update" parameterType="org.aptech.crm.pojo.Permission">
+		update Permission set  name = #{text},type = #{type},url = #{url},percode = #{percode}, available = #{available}
+			where id = #{id}
+	</update>
+	
+	<delete id="deleteById" parameterType="int">
+		delete from Permission where id = #{id} 
+	</delete>
+ 
+	<!-- 权限映射 -->
+	<resultMap type="Permission" id="permissionMap">
+		<id column="id" property="id"/> 
+		<association property="per" column="parentid" select="getById2" > </association>
+		<collection property="children" javaType="java.util.List" ofType="Permission" column="id" select="getChildrenByPerId"></collection>
+	</resultMap>
+	
+	<select id="getChildrenByPerId"  parameterType="int" resultMap="permissionMap">
+		select * , permission.name `text` from Permission where parentid = #{id}
+	</select>
+	
+	<!-- 根据角色查新编号 -->
+	<select id="getPersByrid" parameterType="int" resultType="java.lang.Integer">  
+		 SELECT permission_id FROM role_permission WHERE role_id = #{id} 
+	</select>
+	
+	<select id="getAll" resultMap="permissionMap">
+		SELECT  * , permission.name `text` FROM Permission WHERE parentid IS NULL
+	</select>
+	
+	<select id="getById" parameterType="int" resultMap="permissionMap">
+		select * , permission.name `text` from Permission where id = #{id}
+	</select>
+	
+	<select id="getById2" parameterType="int" resultType="Permission">
+		select * from Permission where id = #{id}
+	</select>
+	
+	 
+	
+	<!-- 删除角色关系 -->
+	<delete id="deleteRela" parameterType="int" >
+		DELETE FROM role_permission WHERE role_id = #{id}
+	</delete>
+	
+	<!-- 删除权限关系 -->
+	<delete id="deletePerRela" parameterType="int">
+		DELETE FROM role_permission WHERE permission_id = #{id}
+	</delete>
+	
+	<!-- 分配权限 -->
+	<insert id="allotPer">
+		insert into role_permission (role_id,permission_id) values
+		<foreach collection="ids" item="id" separator=",">
+			(#{roleId},#{id}) 
+		</foreach>
+	</insert>
+	
+	 
+</mapper>

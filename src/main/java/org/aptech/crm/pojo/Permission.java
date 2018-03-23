@@ -6,7 +6,7 @@ import java.util.List;
 public class Permission implements Serializable {
 	private Integer id;		//编号
 	
-	private String name;	//权限名称
+	private String text;	//权限名称
 	
 	private String type;	//权限类型（menu和permission）
 	
@@ -16,7 +16,7 @@ public class Permission implements Serializable {
 	
 	private Permission per;	//父级权限实体类
 	
-	private List<Permission> pers;	//所有父级权限的实体类
+	private List<Permission> children;	//所有父级权限的实体类
 	
 	private Integer sortstring;		//排序列
 	
@@ -31,13 +31,13 @@ public class Permission implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public String getName() {
-		return name;
+ 
+	public String getText() {
+		return text;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setText(String text) {
+		this.text = text;
 	}
 
 	public String getType() {
@@ -72,12 +72,12 @@ public class Permission implements Serializable {
 		this.per = per;
 	}
 
-	public List<Permission> getPers() {
-		return pers;
+	public List<Permission> getChildren() {
+		return children;
 	}
 
-	public void setPers(List<Permission> pers) {
-		this.pers = pers;
+	public void setChildren(List<Permission> children) {
+		this.children = children;
 	}
 
 	public Integer getSortstring() {
@@ -106,9 +106,8 @@ public class Permission implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Permission [id=" + id + ", name=" + name + ", type=" + type + ", url=" + url + ", percode=" + percode
-				+ ", per=" + per + ", pers=" + pers + ", sortstring=" + sortstring + ", available=" + available
+		return "Permission [id=" + id + ", text=" + text + ", type=" + type + ", url=" + url + ", percode=" + percode
+				+ ", per=" + per + ", children=" + children + ", sortstring=" + sortstring + ", available=" + available
 				+ ", roles=" + roles + "]";
-	}
-	
+	} 
 }

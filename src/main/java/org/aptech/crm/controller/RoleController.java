@@ -11,6 +11,7 @@ import org.aptech.crm.dao.UserDao;
 import org.aptech.crm.pojo.Role;
 import org.aptech.crm.pojo.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,7 +39,8 @@ public class RoleController {
 		return roleDao.getAll();
 	}
 	
-	 
+	
+	
 	@RequestMapping("/getRoleById")
 	@ResponseBody
 	public Role getRoleById(Integer id) {
@@ -75,7 +77,7 @@ public class RoleController {
 	public Map<String,Object> getListByCondition(@RequestParam(defaultValue="1")Integer page,@RequestParam(defaultValue="10")Integer rows,Role role,@RequestParam(defaultValue="id")String sort,@RequestParam(defaultValue = "asc")String order){
 		int start = (page - 1)*rows;
 		Map<String,Object> map = new HashMap<>();
-		map.put("total",roleDao.getCount());
+		map.put("total",roleDao.getCountByCondition(role));
 		map.put("rows",roleDao.getListByCondition(start, rows,role, sort, order));
 		return map;
 	}

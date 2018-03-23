@@ -1,6 +1,7 @@
 package org.aptech.crm.pojo;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Dept implements Serializable {
 	
@@ -8,9 +9,9 @@ public class Dept implements Serializable {
 	
 	private String deptCode;	//部门编码
 	
-	private String deptName;	//部门名称
+	private String text;	//部门名称
 	
-	private Dept dept;		//父级实体类
+	private List<Dept> children;	//父级实体类
 	
 	private String deptPrincipal;	//部门负责人
 	
@@ -38,20 +39,20 @@ public class Dept implements Serializable {
 		this.deptCode = deptCode;
 	}
 
-	public String getDeptName() {
-		return deptName;
+	public String getText() {
+		return text;
 	}
 
-	public void setDeptName(String deptName) {
-		this.deptName = deptName;
+	public void setText(String text) {
+		this.text = text;
 	}
 
-	public Dept getDept() {
-		return dept;
+	public List<Dept> getChildren() {
+		return children;
 	}
 
-	public void setDept(Dept dept) {
-		this.dept = dept;
+	public void setChildren(List<Dept> children) {
+		this.children = children;
 	}
 
 	public String getDeptPhone() {
@@ -96,9 +97,8 @@ public class Dept implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Dept [id=" + id + ", deptCode=" + deptCode + ", deptName=" + deptName + ", dept=" + dept
+		return "Dept [id=" + id + ", deptCode=" + deptCode + ", text=" + text + ", children=" + children
 				+ ", deptPrincipal=" + deptPrincipal + ", deptPhone=" + deptPhone + ", deptFax=" + deptFax
 				+ ", deptType=" + deptType + ", remark=" + remark + "]";
 	}
-	
 }
