@@ -10,25 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	<base href="<%=basePath %>">
 	<meta charset="UTF-8">
 	<title>user List</title>
-	<link rel="stylesheet" type="text/css" href="/easyui/themes/material/easyui.css">
-	<link rel="stylesheet"type="text/css" href= "/easyui/themes/icon.css">
-	<script type="text/javascript" src = "/easyui/jquery.min.js"></script>
-	<script type="text/javascript" src = "/easyui/jquery.easyui.min.js" ></script>
-	<script type="text/javascript" src = "/easyui/locale/easyui-lang-zh_CN.js"></script>
-	<style type="text/css">
-		#condition{
-			padding:15px 10px;
-		}
-		.item{
-			padding: 10px 10px;
-		}
-		.item>span{
-			display: inline-block;
-			width:100px;
-			text-align: right;
-			margin-right: 10px;
-		}
-	</style>
+	 <jsp:include page="/commont.jsp"></jsp:include>
 </head>
 <body>
 <div id="condition" class = "easyui-panel" title = "查询条件">
@@ -67,8 +49,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	//返回部门名称
 	function deptFormatter(value,row,index){
-		if (row != null) {
-			return row.dept.deptName;
+		if (row != null && row.dept != null) {
+			return row.dept.text;
 		}else{
 			return "-";
 		}

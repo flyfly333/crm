@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set; 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
@@ -28,6 +30,32 @@ public class ProjectUtils {
 	public static void setClasses(Class[] classes) {
 		ProjectUtils.classes = classes;
 	} 
+	/**
+	 * 获取ip地址方法
+	 * @param request
+	 * @return
+	 */
+	public static String getIP(HttpServletRequest request) {
+		 String ip = request.getHeader("X-Forwarded-For");   
+         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+             ip = request.getHeader("Proxy-Client-IP");  
+         }  
+         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+             ip = request.getHeader("WL-Proxy-Client-IP");  
+         }  
+         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+             ip = request.getHeader("HTTP_CLIENT_IP");  
+         }  
+         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+             ip = request.getHeader("HTTP_X_FORWARDED_FOR");  
+         }  
+         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+             ip = request.getRemoteAddr();  
+         }
+         return ip;
+	}
+	
+	
 	/**
 	 * freemarker 的框架配置
 	 */
