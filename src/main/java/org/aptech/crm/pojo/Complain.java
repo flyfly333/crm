@@ -4,25 +4,30 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Complain implements Serializable {
+	
 	private Integer id;		//投诉编号
 	
 	private Custom custom;	//客户实体类
 	
 	private String compTheme;	//投诉主题
 	
+	private Integer compType;    //投诉类型
+	
 	private String compDesc;	//描述
 	
 	private Date compTime;		//投诉时间
 	
-	private Linkman linkman;	//投诉人实体类
+	private String compUser;	//投诉人实体类
 	
-	private Integer compDegree;	//紧急过程（0、1、2）
+	private Integer compDegree;	//紧急过程（1、2 、3）
 	
 	private String compCourse;	//处理过程
 	
 	private Integer compResult;	//处理结果
 	
 	private String compRemark;	//备注
+	
+	private String feedback;    //客户反馈
 
 	public Integer getId() {
 		return id;
@@ -48,6 +53,14 @@ public class Complain implements Serializable {
 		this.compTheme = compTheme;
 	}
 
+	public Integer getCompType() {
+		return compType;
+	}
+
+	public void setCompType(Integer compType) {
+		this.compType = compType;
+	}
+
 	public String getCompDesc() {
 		return compDesc;
 	}
@@ -64,12 +77,12 @@ public class Complain implements Serializable {
 		this.compTime = compTime;
 	}
 
-	public Linkman getLinkman() {
-		return linkman;
+	public String getCompUser() {
+		return compUser;
 	}
 
-	public void setLinkman(Linkman linkman) {
-		this.linkman = linkman;
+	public void setCompUser(String compUser) {
+		this.compUser = compUser;
 	}
 
 	public Integer getCompDegree() {
@@ -104,11 +117,21 @@ public class Complain implements Serializable {
 		this.compRemark = compRemark;
 	}
 
+	public String getFeedback() {
+		return feedback;
+	}
+
+	public void setFeedback(String feedback) {
+		this.feedback = feedback;
+	}
+
 	@Override
 	public String toString() {
-		return "Complain [id=" + id + ", custom=" + custom + ", compTheme=" + compTheme + ", compDesc=" + compDesc
-				+ ", compTime=" + compTime + ", linkman=" + linkman + ", compDegree=" + compDegree + ", compCourse="
-				+ compCourse + ", compResult=" + compResult + ", compRemark=" + compRemark + "]";
+		return "Complain [id=" + id + ", custom=" + custom + ", compTheme=" + compTheme + ", compType=" + compType
+				+ ", compDesc=" + compDesc + ", compTime=" + compTime + ", compUser=" + compUser + ", compDegree="
+				+ compDegree + ", compCourse=" + compCourse + ", compResult=" + compResult + ", compRemark="
+				+ compRemark + ", feedback=" + feedback + "]";
 	}
-	
+
+	 
 }

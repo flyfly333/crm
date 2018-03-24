@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.aptech.crm.dao.QuestionDao">
+	<insert id="add" parameterType="org.aptech.crm.pojo.Question"
+		useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		insert into Question(question,answer,hint_text,type)
+			values(    #{question},  #{answer},  #{hintText},  #{type}  )
+	</insert>
+	
+	<update id="update" parameterType="org.aptech.crm.pojo.Question">
+		update Question set id = #{id},question = #{question},answer = #{answer},hint_text = #{hintText},type = #{type}
+			where id = #{id}
+	</update>
+	
+	<delete id="deleteByIds" parameterType="java.lang.reflect.Array">
+		delete from Question where id in
+		<foreach collection="array" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+
+	<sql id="conditionSql">
+		<if test="condition != null">
+			<where>
+				<if test="condition.question != null and condition.question != ''">
+					question like concat ('%',#{condition.question},'%')
+				</if>
+				<if test="condition.type != null and condition.type != ''">
+					type = #{condition.type}
+				</if>
+			</where>
+		</if>
+	</sql>
+	
+	<select id="getAll" resultType="org.aptech.crm.pojo.Question">
+		select * from Question
+	</select>
+	
+	<select id="getById" parameterType="int" resultType="org.aptech.crm.pojo.Question">
+		select * from Question where id = #{id}
+	</select>
+	
+	<select id="getListByCondition" resultType="org.aptech.crm.pojo.Question">
+		select * from Question
+			<include refid="conditionSql"></include>
+		order by ${column} ${orderBy}
+			limit #{start},#{limit}
+	</select>
+	<select id="getCount" resultType="int">
+		select count(1) from Question
+		<include refid="conditionSql"></include>
+	</select>
+</mapper>

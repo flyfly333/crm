@@ -11,6 +11,7 @@ F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\controller\CustomControlle
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\utils\TestGenerate.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\Custom.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\Address.java
+F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\controller\QuestionController.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\dao\DeptDao.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\CompRecord.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\Permission.java
@@ -26,6 +27,7 @@ F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\controller\RoleController.
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\Role.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\controller\UserController.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\dao\RoleDao.java
+F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\dao\QuestionDao.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\Post.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\dao\AddressDao.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\Accessory.java
