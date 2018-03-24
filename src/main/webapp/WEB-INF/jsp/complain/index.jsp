@@ -25,11 +25,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<th data-options = "field:'abc',width:30,checkbox:true"></th>
 			<th data-options = "field:'id',width:30,sortable:true,order:'desc'">编号</th>
 			<th data-options = "field:'compTheme',width:250">投诉主题</th>
+			<th data-options = "field:'aaa',width:250,formatter:customFormatter">对应客户</th>
 			<th data-options = "field:'compType',width:40">投诉分类</th>
 			<th data-options = "field:'compTime',width:150">投诉时间</th>
-			<th data-options = "field:'dept1',width:40">紧急程度</th>
+			<th data-options = "field:'compDegree',width:40">紧急程度</th>
 			<th data-options = "field:'compResult',width:40">处理结果</th>
-			<th data-options = "field:'createUser',width:50">创建人</th>
+			<th data-options = "field:'user',width:50">创建人</th>
 		</thead>
 	   <tbody>
 	</tbody>
@@ -39,14 +40,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <a href="javascript:void(0)" class="easyui-linkbutton" onclick = "add_complain()" data-options="iconCls:'icon-add',plain:true">添加</a>
 <a href="javascript:void(0)" class="easyui-linkbutton" onclick = "edit_complain()" data-options="iconCls:'icon-edit',plain:true">修改</a>
 <a href="javascript:void(0)" class="easyui-linkbutton" onclick = "delete_complain()" data-options="iconCls:'icon-remove',plain:true">删除</a>
-<a href="javascript:void(0)" class="easyui-linkbutton" onclick = "export_complain()" data-options="iconCls:'icon-sum',plain:true">导出</a>
 </div>
 <script type="text/javascript">
 
 	//返回部门名称
-	function deptFormatter(value,row,index){
-		if (row != null && row.dept != null) {
-			return row.dept.text;
+	function customFormatter(value,row,index){
+		if (row != null && row.custom != null) {
+			return row.custom.shortName;
 		}else{
 			return "-";
 		}

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.aptech.crm.dao.ComplainDao">
+	<!-- <insert id="add" parameterType="org.aptech.crm.pojo.Complain"
+		useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		insert into Complain(id,custom,compTheme,compType,compDesc,compTime,compUser,compDegree,compCourse,compResult,compRemark,feedback,user)
+			values(  #{id},  #{custom},  #{compTheme},  #{compType},  #{compDesc},  #{compTime},  #{compUser},  #{compDegree},  #{compCourse},  #{compResult},  #{compRemark},  #{feedback},  #{user}  )
+	</insert>
+	
+	<update id="update" parameterType="org.aptech.crm.pojo.Complain">
+		update Complain set id = #{id},custom = #{custom},compTheme = #{compTheme},compType = #{compType},compDesc = #{compDesc},compTime = #{compTime},compUser = #{compUser},compDegree = #{compDegree},compCourse = #{compCourse},compResult = #{compResult},compRemark = #{compRemark},feedback = #{feedback},user = #{user}
+			where id = #{id}
+	</update>
+	
+	<delete id="deleteByIds" parameterType="java.lang.reflect.Array">
+		delete from Complain where id in
+		<foreach collection="array" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+
+	
+	
+	<select id="getAll" resultType="org.aptech.crm.pojo.Complain">
+		select * from Complain
+	</select>
+	
+	<select id="getById" parameterType="int" resultType="org.aptech.crm.pojo.Complain">
+		select * from Complain where id = #{id}
+	</select> -->
+	
+	<sql id="conditionSql">
+		<if test="condition != null">
+			<where>
+			</where>
+		</if>
+	</sql>
+	
+	<resultMap type="Complain" id="complainMap">
+		<id column="id" property="id"/>
+		<association property="custom" column="custom_id" select="org.aptech.crm.dao.CustomDao.getById2"></association>
+	</resultMap>
+	
+	<select id="getListByCondition" resultMap="complainMap">
+		select * from Complain
+			<include refid="conditionSql"></include>
+		order by ${column} ${orderBy}
+		limit #{start},#{limit}
+	</select>
+	<select id="getCount" resultType="int">
+		select count(1) from Complain
+			<include refid="conditionSql"></include>
+	</select>
+</mapper>
