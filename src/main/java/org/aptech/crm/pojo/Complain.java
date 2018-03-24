@@ -28,6 +28,8 @@ public class Complain implements Serializable {
 	private String compRemark;	//备注
 	
 	private String feedback;    //客户反馈
+	
+	private User user; 			//创建人
 
 	public Integer getId() {
 		return id;
@@ -35,6 +37,14 @@ public class Complain implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Custom getCustom() {
