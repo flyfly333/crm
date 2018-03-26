@@ -12,14 +12,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<title>Title</title>
 </head>
 <body>
-	<form id = "userForm" method="post">
+	<form id = "complainFrom" method="post">
 		<div class = "item">
 			<input type="hidden" value="0" name = "id"/>
-			 <span>投诉主题:  </span><input type="text" name = "compTheme" />
+			 <span>投诉主题:  </span><input type="text" class="easyui-textbox" name = "compTheme" />
 		</div>
 		<div class = "item">
 			 <span>投诉类型:  </span>
-			  <select name = "compType" style="width : 300px">
+			  <select name = "compType"  class="easyui-combobox" style = "width: 173px" data-options = "panelHeight:100,editable:false" >
 			 	<option value = "1">产品投诉</option>
 			 	<option value = "2">服务投诉</option>
 			 	<option value = "3">客户意见</option>
@@ -28,33 +28,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		 
 		<div class = "item">
-			 <span>对应客户:  </span>
-			 <input id="cc" class="easyui-combobox" name="dept"   
-    data-options="valueField:'id',textField:'text',url:'custom/getAll'" />  
-			 
+			 <span>投诉时间:  </span>
+			 <input  id="Sdata" name = "compTime"  type= "text" class= "easyui-datebox"  data-options="editable:false"> </input>
 		</div>
 		<div class = "item">
-			 <span>locked: </span><input name = "locked" value="1" class="easyui-switchbutton" data-options="onText:'是',offText:'否'">
+			<span>投诉人:  </span>
+			<input type="text" name = "compUser"/>
 		</div>
+		<div class = "item"> <span>紧急程度:  </span>
+			 <input type="radio" name="compDegree" value="1" checked="checked">普通
+			 <input type="radio" name="compDegree" value="2">紧急
+			 <input type="radio" name="compDegree" value="3">非常紧急
+		</div>
+		 <div class = "item"> <span>处理结果:  </span>
+			 <input type="radio" name="compResult" value="1" checked="checked">未处理
+			 <input type="radio" name="compResult" value="2">处理中
+			 <input type="radio" name="compResult" value="3">处理完成
+		</div> 
 		<div class = "item">
-		 <span>sex:  </span>
-			 <input type="radio" name="sex" value="1" checked="checked">男
-			 <input type="radio" name="sex" value="0">女
+			 <span>描述: </span> 
+			<textarea name="compDesc" rows="4" cols="40"></textarea>
 		</div>
-		
-		<div class = "item">
-			 <span>dept:  </span><input id = "dept" type="text" class = "easyui-combobox" name = "dept.id" 
-			 data-options="valueField:'id',textField:'deptName',url:'dept/all',panelHeight:'auto' ,hasDownArrow:true,panelMinWidth:150,onChange:change" />
-		</div>
-		<div class = "item">
-			 <span>post:  </span><input id = "post" type="text" name = "post.id" class = "easyui-combobox"
-			 data-options="valueField:'id',textField:'postName',url:'post/all',panelHeight:'auto' ,hasDownArrow:true,panelMinWidth:150"
-			 />
-		</div>
-		<div class = "item">
-			 <span>roles:  </span><input id ="rids"  class = "easyui-tagbox"  name="rids"
-                  data-options="valueField:'id',textField:'name',url:'role/all',panelHeight:'auto',multiple:true,hasDownArrow:true,panelMinWidth:150">
-		</div>
+		 <div class = "item">
+			 <span>处理过程: </span> 
+			<textarea name="compDesc" rows="4" cols="40"></textarea>
+		</div>  
 	</form>
 </body>
 </html>

@@ -149,10 +149,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		})
 	}
 	
-	//部门下拉框改变事件
-	function change(newValue,oldValue){
-		$('#post').combobox('reload','post/getPostByDeptId?deptId='+newValue);  
-	}
+	 
 	//添加方法
 	function add_complain(){
 		 var d = $("<div></div>").appendTo("body");
@@ -200,7 +197,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				text:'确定',
 				handler:function (){ 
 					//提交表单添加数据
-					$("#complainForm").form("submit",{
+					$("#complainFrom").form("submit",{
 						url:'complain/add',
 						success:function (data){ 
 							alert("添加成功!"); 

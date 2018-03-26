@@ -70,7 +70,6 @@ public class ComplainController {
 	@RequestMapping("/list")
 	@ResponseBody
 	public Map<String,Object> getListByCondition(@RequestParam(defaultValue="1")Integer page,@RequestParam(defaultValue="10")Integer rows,Complain complain,@RequestParam(defaultValue="id")String sort,@RequestParam(defaultValue = "asc")String order){
-		 System.out.println(complain);
 		int start = (page - 1)*rows;
 		Map<String,Object> map = new HashMap<>();
 		map.put("total",complainDao.getCountByCondition(complain));
