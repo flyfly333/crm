@@ -33,7 +33,11 @@
 		 FROM USER
 		 WHERE id = #{id}
  	</select>
- 
+	<select id="getById2" parameterType="int" resultType="User">
+ 		SELECT id,username,salt,user_code,PASSWORD,sex,dept_id,post_id,phone,birthday,rntry_time,locked 
+		FROM USER
+		WHERE id = #{id}
+ 	</select>
  	<!-- 封装条件 -->
 	<sql id="conditionSql">
 		<if test="condition != null">

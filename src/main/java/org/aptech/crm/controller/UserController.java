@@ -78,6 +78,7 @@ public class UserController {
 		System.out.println();
 		int start = (page - 1)*rows;
 		Map<String,Object> map = new HashMap<>();
+		System.out.println("数量为："  + userDao.getCount());
 		map.put("total",userDao.getCount());
 		map.put("rows",userDao.getListByCondition(start, rows,user, sort, order));
 		return map;

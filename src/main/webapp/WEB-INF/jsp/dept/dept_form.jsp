@@ -15,7 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<form id = "deptForm" method="post">
 		<div class = "item">
 			 <span>父级部门:</span>
-			 <select id="perParent" name = "dept.id" class="easyui-combotree" style="width:173px;"   
+			 <select id="deptParent" name = "dept.id" class="easyui-combotree" style="width:173px;"   
         data-options="url:'dept/list',required:true"></select> 
 		</div> 
 		

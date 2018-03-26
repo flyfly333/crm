@@ -16,6 +16,10 @@
 		select * from custom where id = #{id}
 	</select>
 	
+	<select id="getById2" parameterType="int" resultType="Custom">
+		select * from custom where id = #{id}
+	</select>
+	
 	<sql id="conditionSql">
 		<if test="condition != null">
 			<where>

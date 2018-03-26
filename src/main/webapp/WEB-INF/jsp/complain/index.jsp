@@ -9,48 +9,77 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
  	<base href="<%=basePath %>">
 	<meta charset="UTF-8">
-	<title>user List</title>
+	<title>complain List</title>
 	 <jsp:include page="/commont.jsp"></jsp:include>
 </head>
 <body>
 <div id="condition" class = "easyui-panel" title = "查询条件">
-	<form id = "form1">
-		UserName : <input type="text" id = "username"/>
-		Roles:
-		<input id="roles"  name="dept"
-	    data-options="valueField:'id',textField:'name',url:'role/all',panelHeight:'auto',multiple:true">
-	    <a id="btn" href="javascript:void(0)" onclick = "setUserCondition()" class="easyui-linkbutton" data-options="iconCls:'icon-sum'">查询</a>
+	<form id = "complainForm">
+		UserName : <input type="text" id = "complainName"/> 
+		&nbsp;&nbsp;&nbsp;时间&nbsp;&nbsp;<input  id="Sdata" name = "compTime"  type= "text" class= "easyui-datebox"  data-options="editable:false"> </input>
+		&nbsp;&nbsp;到&nbsp;&nbsp;<input  id="Edata" name = "compTime"  type= "text" class= "easyui-datebox"  data-options="editable:false"> </input>
+	    <a id="btn" href="javascript:void(0)" onclick = "setComplainCondition()" class="easyui-linkbutton" data-options="iconCls:'icon-sum'">查询</a>
 		<a id="btn" href="javascript:void(0)" onclick = "reset()" class="easyui-linkbutton" data-options="iconCls:'icon-redo'">撤销</a>
 	</form>
 </div>
-	<table id = "dataGrid" title="用户列表">
+	<table id = "complainTable" title="投诉列表">
 		<thead>
 			<th data-options = "field:'abc',width:30,checkbox:true"></th>
-			<th data-options = "field:'id',width:30,sortable:true,order:'desc'">编号</th>
-			<th data-options = "field:'userName',width:50">账号</th>
-			<th data-options = "field:'userCode',width:40">用户编码</th>
-			<th data-options = "field:'salt',width:50">盐值</th>
-			<th data-options = "field:'phone',width:40">电话</th>
-			<th data-options = "field:'dept1',width:50,formatter:deptFormatter">部门</th>
-			<th data-options = "field:'post',width:50,formatter:postFormatter">职位</th>
-			<th data-options = "field:'roles',width:120,formatter:roleFormatter">角色</th> 
+			<th data-options = "field:'id',width:30,sortable:true,order:'desc',align:'center'">编号</th>
+			<th data-options = "field:'compTheme',width:250">投诉主题</th>
+			<th data-options = "field:'aaa',width:50,formatter:customFormatter,align:'center'">对应客户</th>
+			<th data-options = "field:'compType',width:40,formatter:typeFormatter,align:'center'">投诉分类</th>
+			<th data-options = "field:'compTime',width:100,align:'center'">投诉时间</th>
+			<th data-options = "field:'compDegree',width:40,formatter:degreeFormatter,align:'center'">紧急程度</th>
+			<th data-options = "field:'compResult',width:40,formatter:resultFormatter,align:'center'">处理结果</th>
+			<th data-options = "field:'user',width:50,formatter:userFormatter">创建人</th>
 		</thead>
 	   <tbody>
 	</tbody>
-	</table>
+</table>
 	
 <div id="tb">
-<a href="javascript:void(0)" class="easyui-linkbutton" onclick = "add_user()" data-options="iconCls:'icon-add',plain:true">添加</a>
-<a href="javascript:void(0)" class="easyui-linkbutton" onclick = "edit_user()" data-options="iconCls:'icon-edit',plain:true">修改</a>
-<a href="javascript:void(0)" class="easyui-linkbutton" onclick = "delete_user()" data-options="iconCls:'icon-remove',plain:true">删除</a>
-<a href="javascript:void(0)" class="easyui-linkbutton" onclick = "export_user()" data-options="iconCls:'icon-sum',plain:true">导出</a>
+<a href="javascript:void(0)" class="easyui-linkbutton" onclick = "add_complain()" data-options="iconCls:'icon-add',plain:true">添加</a>
+<a href="javascript:void(0)" class="easyui-linkbutton" onclick = "edit_complain()" data-options="iconCls:'icon-edit',plain:true">修改</a>
+<a href="javascript:void(0)" class="easyui-linkbutton" onclick = "delete_complain()" data-options="iconCls:'icon-remove',plain:true">删除</a>
 </div>
 <script type="text/javascript">
 
+	//创建人自定义列
+	function userFormatter(value,row,index){
+		if (row != null && row.user != null) {
+			return row.user.userName;
+		}else{
+			return "-";
+		}
+	}
+	//处理结果数组
+	var complainResult = ["未处理","处理中","已完成"];
+	//处理结果的自定义列
+	function resultFormatter(value,row,index){
+		return "<img src = '/images/cl_"+row.compResult+".gif' title = '"+complainResult[row.compResult - 1]+"'/>";
+	} 
+	//紧急程度的数组
+	var complainDegree = ["普通","紧急","非常紧急"];
+	//紧急程度的自定义列
+	function degreeFormatter(value,row,index){
+		return "<img src = '/images/ts_"+row.compDegree+".gif' title = '"+complainDegree[row.compDegree - 1]+"'/>";
+	}
+	//投诉类型的数组
+    var complainType = ["产品投诉","服务投诉","客户意见","其他"];
+		
+	//返回投诉分类
+	function typeFormatter(value,row,index) {
+		if (row != null && row.compType > 0) {
+			return complainType[row.compType];
+		}else{
+			return "-";
+		}
+	}
 	//返回部门名称
-	function deptFormatter(value,row,index){
-		if (row != null && row.dept != null) {
-			return row.dept.text;
+	function customFormatter(value,row,index){
+		if (row != null && row.custom != null) {
+			return row.custom.shortName;
 		}else{
 			return "-";
 		}
@@ -64,27 +93,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 	}
 	//修改用户方法
-	function edit_user(){
-		var row = $("#dataGrid").datagrid("getSelected");
+	function edit_complain(){
+		var row = $("#complainTable").datagrid("getSelected");
 		if (row == null) {
 			alert("请选择用户!");
 			return;
 		}
 		//选中最多的只保留最先选中的
-		$("#dataGrid").datagrid("clearSelections");
-		$("#dataGrid").datagrid("selectRecord",row.id);
+		$("#complainTable").datagrid("clearSelections");
+		$("#complainTable").datagrid("selectRecord",row.id);
 		var d = $("<div></div>").appendTo("body");
 		d.dialog({
 			title:'修改用户',
 			width:500,
 			height:'auto',
 			modal:true,
-			href:'user/form',
+			href:'complain/form',
 			onClose:function (){ $(this).dialog("destroy"); },
 			onLoad:function (){ 
-				$.post("user/getUserById",{id:row.id},function (data){
+				$.post("complain/getUserById",{id:row.id},function (data){
 					console.log(data);
-					$("#userForm").form("load",data);
+					$("#complainForm").form("load",data);
 					var rids = new Array();
 					$.each(data.roles,function (){
 						rids.push(this.id); 
@@ -98,12 +127,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				iconCls:"icon-ok",
 				text:"确定",
 				handler:function(){
-					$("#userForm").form("submit",{
-						url : "user/edit",
+					$("#complainForm").form("submit",{
+						url : "complain/edit",
 						success : function(data){ 
 							console.log(data);
 							d.dialog("close");
-							$("#dataGrid").datagrid("reload");
+							$("#complainTable").datagrid("reload");
 							alert("修改成功！");
 						}
 					});
@@ -113,7 +142,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				text:"取消",
 				handler:function(){
 					d.dialog("close");
-					$("#dataGrid").datagrid("clearSelections");
+					$("#complainTable").datagrid("clearSelections");
 				}
 			}]
 			 
@@ -125,24 +154,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$('#post').combobox('reload','post/getPostByDeptId?deptId='+newValue);  
 	}
 	//添加方法
-	function add_user(){
+	function add_complain(){
 		 var d = $("<div></div>").appendTo("body");
 		 d.dialog({
 			 title:'添加用户',
 			 width:500,
 			 height:500,
 			 modal:true,
-			 href:'user/form',
+			 href:'complain/form',
 			 onClose:function (){ $(this).dialog("destroy");},
 			 buttons:[{
 				 iconCls:'icon-ok',
 				 text:'确定',
 				 handler:function (){ 
-					 $("#userFrom").form("submit",{
-						 url:'user/add',
+					 $("#complainFrom").form("submit",{
+						 url:'complain/add',
 						 success:function (data){
 							 alert("添加成功！");
-							 $("#dataGrid").datagrid("reload");
+							 $("#complainTable").datagrid("reload");
 							 d.dialog("close");
 						 }
 					 })
@@ -157,25 +186,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 }]
 		 });
 	}
-	function add_user(){
+	function add_complain(){
 		var d = $("<div></div>").appendTo("body");
 		d.dialog({
 			title:'添加用户',
 			width:500,
 			height:'auto',
 			modal:true,
-			href:'user/form',
+			href:'complain/form',
 			onClose:function (){ $(this).dialog("destroy"); },
 			buttons:[{
 				iconCls:'icon-ok',
 				text:'确定',
 				handler:function (){ 
 					//提交表单添加数据
-					$("#userForm").form("submit",{
-						url:'user/add',
+					$("#complainForm").form("submit",{
+						url:'complain/add',
 						success:function (data){ 
 							alert("添加成功!"); 
-							$("#dataGrid").datagrid("reload");
+							$("#complainTable").datagrid("reload");
 							d.dialog("close");
 						}
 					}); 
@@ -186,7 +215,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				handler:function (){
 					d.dialog("close");
 				}
-				
 			}]
 		})
 	}	 
@@ -208,8 +236,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 
 		//删除方法
-		function delete_user(){
-			var ids = $("#dataGrid").datagrid("getSelections");
+		function delete_complain(){
+			var ids = $("#complainTable").datagrid("getSelections");
 			console.log(ids.length);
 			if (ids.length == 0) {
 				$.messager.alert("提示","请选择要删除的行！","warning");
@@ -222,9 +250,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					for (var i = 1; i < ids.length; i++) {
 						idStr += "&ids=" + ids[i].id;
 					}
-					$.post("user/batchDelete",idStr,function (data){
+					$.post("complain/batchDelete",idStr,function (data){
 						if (data.result == true) {
-							$("#dataGrid").datagrid("reload");
+							$("#complainTable").datagrid("reload");
 							alert("删除成功!");
 						}
 					})
@@ -236,38 +264,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		//撤销条件点击事件
 		function reset(){
-			$("#form1").form("clear");
+			$("#complainForm").form("clear");
 		}
 
 		//设置查询条件
-		function setUserCondition(){ 
-		var data = {username:$("#username").val()}; 
-		var ids = $("#roles").combobox("getValues");
-		for (var i = 0; i < ids.length; i++) {
-			console.log(ids[i]);
-			data["roles["+i+"].id"] = ids[i];
-		} 
-		$("#dataGrid").datagrid("reload",data); 
+		function setComplainCondition(){ 
+			console.log($("#Sdata").val())
+			var data = {compTheme:$("#complainName").val(),Stime:$("#Sdata").val(),Etime:$("#Edata").val()}; 
+			$("#complainTable").datagrid("reload",data); 
 	    }
 		
-		//拼接角色信息
-		function roleFormatter(value,row,index){
-			if (value.length > 0) {
-				var str = "";
-				for (var i = 0; i < value.length; i++) {
-					str += value[i].name + ", "
-				}
-				return str;
-			}else{
-				return "-";
-			}
-			
-		}
+		 
 		
 		$(function (){  
 			 //datagrid 组件
-			$("#dataGrid").datagrid({
-				url:"user/list",
+			$("#complainTable").datagrid({
+				url:"complain/list",
 				rownumbers:true,
 				striped:true,
 				fitColumns:true,
@@ -278,11 +290,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 		}) 
 		
-		$("#roles").tagbox({
-			width:'auto',
-			hasDownArrow:true,
-			panelMinWidth:150
-		}); 
+		 
 	</script>	  
 </body>
 </html>

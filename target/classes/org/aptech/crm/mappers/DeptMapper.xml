@@ -6,13 +6,13 @@
 		insert into Dept(dept_code,dept_name,parentid,dept_principal,dept_phone,dept_fax,dept_type,remark)
 			values(#{deptCode},#{text},  #{dept.id},  #{deptPrincipal},  #{deptPhone},  #{deptFax},  #{daptType},  #{remark}  )
 	</insert>
-	<!--
+	
 	<update id="update" parameterType="org.aptech.crm.pojo.Dept">
-		update Dept set id = #{id},deptCode = #{deptCode},deptName = #{deptName},dept = #{dept},daptPrincipal = #{daptPrincipal},deptPhone = #{deptPhone},deptFax = #{deptFax},daptType = #{daptType},remark = #{remark}
+		update Dept set dept_code = #{deptCode},dept_name = #{text},parentid = #{dept.id},dept_principal = #{deptPrincipal},dept_phone = #{deptPhone},dept_fax = #{deptFax},remark = #{remark}
 			where id = #{id}
 	</update> 
 	
-	
+	<!--
 
 	<sql id="conditionSql">
 		<if test="condition != null">

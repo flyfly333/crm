@@ -12,6 +12,14 @@
 		<property name="prefix" value="/WEB-INF/jsp/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
+	
+	<!-- <mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="org.aptech.crm.utils.LogInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors> -->
+	
 	<mvc:annotation-driven>
 		<!-- 整合FastJson插件 -->
 		<mvc:message-converters>
