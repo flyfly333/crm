@@ -70,19 +70,17 @@ public class ComplainController {
 	@RequestMapping("/list")
 	@ResponseBody
 	public Map<String,Object> getListByCondition(@RequestParam(defaultValue="1")Integer page,@RequestParam(defaultValue="10")Integer rows,Complain complain,@RequestParam(defaultValue="id")String sort,@RequestParam(defaultValue = "asc")String order){
-		 
+		 System.out.println(complain);
 		int start = (page - 1)*rows;
 		Map<String,Object> map = new HashMap<>();
-		map.put("total",complainDao.getCount());
+		map.put("total",complainDao.getCountByCondition(complain));
 		map.put("rows",complainDao.getListByCondition(start, rows,complain, sort, order));
 		return map;
 	}
 	@RequestMapping("/edit")
 	@ResponseBody
-	public Map<String, Object> Update(Complain complain,Integer [] rids){
-		for (Integer integer : rids) {
-			System.out.println(integer);
-		}
+	public Map<String, Object> Update(Complain complain ){
+		 
 		Map<String, Object> map = new HashMap<>();
 		complainDao.update(complain);
 		 

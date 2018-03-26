@@ -15,16 +15,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<form id = "userForm" method="post">
 		<div class = "item">
 			<input type="hidden" value="0" name = "id"/>
-			 <span>userName:  </span><input type="text" name = "userName" />
+			 <span>投诉主题:  </span><input type="text" name = "compTheme" />
 		</div>
 		<div class = "item">
-			 <span>userCode:  </span><input type="text" name = "userCode" />
+			 <span>投诉类型:  </span>
+			  <select name = "compType" style="width : 300px">
+			 	<option value = "1">产品投诉</option>
+			 	<option value = "2">服务投诉</option>
+			 	<option value = "3">客户意见</option>
+			 	<option value = "4">其他</option>
+			  </select>
 		</div>
+		 
 		<div class = "item">
-			 <span>password:  </span><input type="password" name = "password" />
-		</div>
-		<div class = "item">
-			 <span>salt:  </span><input type="text" name = "salt" />
+			 <span>对应客户:  </span>
+			 <input id="cc" class="easyui-combobox" name="dept"   
+    data-options="valueField:'id',textField:'text',url:'custom/getAll'" />  
+			 
 		</div>
 		<div class = "item">
 			 <span>locked: </span><input name = "locked" value="1" class="easyui-switchbutton" data-options="onText:'是',offText:'否'">

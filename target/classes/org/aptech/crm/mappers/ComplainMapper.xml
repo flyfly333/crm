@@ -10,16 +10,7 @@
 	<update id="update" parameterType="org.aptech.crm.pojo.Complain">
 		update Complain set id = #{id},custom = #{custom},compTheme = #{compTheme},compType = #{compType},compDesc = #{compDesc},compTime = #{compTime},compUser = #{compUser},compDegree = #{compDegree},compCourse = #{compCourse},compResult = #{compResult},compRemark = #{compRemark},feedback = #{feedback},user = #{user}
 			where id = #{id}
-	</update>
-	
-	<delete id="deleteByIds" parameterType="java.lang.reflect.Array">
-		delete from Complain where id in
-		<foreach collection="array" item="item" open="(" close=")" separator=",">
-			#{item}
-		</foreach>
-	</delete>
-
-	
+	</update> 
 	
 	<select id="getAll" resultType="org.aptech.crm.pojo.Complain">
 		select * from Complain
@@ -29,16 +20,41 @@
 		select * from Complain where id = #{id}
 	</select> -->
 	
+	
+	
+	
+	
+	<delete id="deleteByIds" parameterType="java.lang.reflect.Array">
+		delete from Complain where id in
+		<foreach collection="array" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+	
 	<sql id="conditionSql">
 		<if test="condition != null">
-			<where>
-			</where>
+			  <where>
+				<if test="condition.compTheme != null and condition.compTheme != ''">
+					  comp_theme like concat('%',#{condition.compTheme},'%')
+				</if>
+				<if test="condition.Stime != null and condition.Stime != ''">
+					 and comp_time &gt; #{condition.Stime} 
+				</if>
+				<if test="condition.Etime != null and condition.Etime != ''">
+					 and comp_time &lt; #{condition.Etime} 
+				</if>
+				<if test="condition.custom != null and condition.custom.id > 0">
+					and custom_id = #{condition.custom.id}
+				</if>
+			</where>  
 		</if>
 	</sql>
 	
 	<resultMap type="Complain" id="complainMap">
 		<id column="id" property="id"/>
 		<association property="custom" column="custom_id" select="org.aptech.crm.dao.CustomDao.getById2"></association>
+		<association property="user" column="create_user" select="org.aptech.crm.dao.UserDao.getById2"></association>
 	</resultMap>
 	
 	<select id="getListByCondition" resultMap="complainMap">
@@ -47,8 +63,8 @@
 		order by ${column} ${orderBy}
 		limit #{start},#{limit}
 	</select>
-	<select id="getCount" resultType="int">
+	<select id="getCountByCondition" parameterType="Complain" resultType="int">
 		select count(1) from Complain
-			<include refid="conditionSql"></include>
+		<include refid="conditionSql"></include>
 	</select>
 </mapper>

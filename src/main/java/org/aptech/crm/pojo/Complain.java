@@ -3,6 +3,8 @@ package org.aptech.crm.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class Complain implements Serializable {
 	
 	private Integer id;		//投诉编号
@@ -15,6 +17,7 @@ public class Complain implements Serializable {
 	
 	private String compDesc;	//描述
 	
+	@JSONField(format="yyyy-MM-dd hh:mm:ss")
 	private Date compTime;		//投诉时间
 	
 	private String compUser;	//投诉人实体类
@@ -30,6 +33,27 @@ public class Complain implements Serializable {
 	private String feedback;    //客户反馈
 	
 	private User user; 			//创建人
+
+	private String Stime;       //开始查询时间字符串
+	
+	private String Etime;        //结束查询时间字符串
+	
+	
+	public String getStime() {
+		return Stime;
+	}
+
+	public void setStime(String stime) {
+		Stime = stime;
+	}
+
+	public String getEtime() {
+		return Etime;
+	}
+
+	public void setEtime(String etime) {
+		Etime = etime;
+	}
 
 	public Integer getId() {
 		return id;

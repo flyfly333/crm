@@ -16,25 +16,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div id="condition" class = "easyui-panel" title = "查询条件">
 	<form id = "complainForm">
 		UserName : <input type="text" id = "complainName"/> 
-	    <a id="btn" href="javascript:void(0)" onclick = "setUserCondition()" class="easyui-linkbutton" data-options="iconCls:'icon-sum'">查询</a>
+		&nbsp;&nbsp;&nbsp;时间&nbsp;&nbsp;<input  id="Sdata" name = "compTime"  type= "text" class= "easyui-datebox"  data-options="editable:false"> </input>
+		&nbsp;&nbsp;到&nbsp;&nbsp;<input  id="Edata" name = "compTime"  type= "text" class= "easyui-datebox"  data-options="editable:false"> </input>
+	    <a id="btn" href="javascript:void(0)" onclick = "setComplainCondition()" class="easyui-linkbutton" data-options="iconCls:'icon-sum'">查询</a>
 		<a id="btn" href="javascript:void(0)" onclick = "reset()" class="easyui-linkbutton" data-options="iconCls:'icon-redo'">撤销</a>
 	</form>
 </div>
-	<table id = "complainTable" title="用户列表">
+	<table id = "complainTable" title="投诉列表">
 		<thead>
 			<th data-options = "field:'abc',width:30,checkbox:true"></th>
-			<th data-options = "field:'id',width:30,sortable:true,order:'desc'">编号</th>
+			<th data-options = "field:'id',width:30,sortable:true,order:'desc',align:'center'">编号</th>
 			<th data-options = "field:'compTheme',width:250">投诉主题</th>
-			<th data-options = "field:'aaa',width:250,formatter:customFormatter">对应客户</th>
-			<th data-options = "field:'compType',width:40">投诉分类</th>
-			<th data-options = "field:'compTime',width:150">投诉时间</th>
-			<th data-options = "field:'compDegree',width:40">紧急程度</th>
-			<th data-options = "field:'compResult',width:40">处理结果</th>
-			<th data-options = "field:'user',width:50">创建人</th>
+			<th data-options = "field:'aaa',width:50,formatter:customFormatter,align:'center'">对应客户</th>
+			<th data-options = "field:'compType',width:40,formatter:typeFormatter,align:'center'">投诉分类</th>
+			<th data-options = "field:'compTime',width:100,align:'center'">投诉时间</th>
+			<th data-options = "field:'compDegree',width:40,formatter:degreeFormatter,align:'center'">紧急程度</th>
+			<th data-options = "field:'compResult',width:40,formatter:resultFormatter,align:'center'">处理结果</th>
+			<th data-options = "field:'user',width:50,formatter:userFormatter">创建人</th>
 		</thead>
 	   <tbody>
 	</tbody>
-	</table>
+</table>
 	
 <div id="tb">
 <a href="javascript:void(0)" class="easyui-linkbutton" onclick = "add_complain()" data-options="iconCls:'icon-add',plain:true">添加</a>
@@ -43,6 +45,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 <script type="text/javascript">
 
+	//创建人自定义列
+	function userFormatter(value,row,index){
+		if (row != null && row.user != null) {
+			return row.user.userName;
+		}else{
+			return "-";
+		}
+	}
+	//处理结果数组
+	var complainResult = ["未处理","处理中","已完成"];
+	//处理结果的自定义列
+	function resultFormatter(value,row,index){
+		return "<img src = '/images/cl_"+row.compResult+".gif' title = '"+complainResult[row.compResult - 1]+"'/>";
+	} 
+	//紧急程度的数组
+	var complainDegree = ["普通","紧急","非常紧急"];
+	//紧急程度的自定义列
+	function degreeFormatter(value,row,index){
+		return "<img src = '/images/ts_"+row.compDegree+".gif' title = '"+complainDegree[row.compDegree - 1]+"'/>";
+	}
+	//投诉类型的数组
+    var complainType = ["产品投诉","服务投诉","客户意见","其他"];
+		
+	//返回投诉分类
+	function typeFormatter(value,row,index) {
+		if (row != null && row.compType > 0) {
+			return complainType[row.compType];
+		}else{
+			return "-";
+		}
+	}
 	//返回部门名称
 	function customFormatter(value,row,index){
 		if (row != null && row.custom != null) {
@@ -182,7 +215,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				handler:function (){
 					d.dialog("close");
 				}
-				
 			}]
 		})
 	}	 
@@ -236,29 +268,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 
 		//设置查询条件
-		function setUserCondition(){ 
-		var data = {compTheme:$("#complainName").val()}; 
-		var ids = $("#roles").combobox("getValues");
-		for (var i = 0; i < ids.length; i++) {
-			console.log(ids[i]);
-			data["roles["+i+"].id"] = ids[i];
-		} 
-		$("#complainTable").datagrid("reload",data); 
+		function setComplainCondition(){ 
+			console.log($("#Sdata").val())
+			var data = {compTheme:$("#complainName").val(),Stime:$("#Sdata").val(),Etime:$("#Edata").val()}; 
+			$("#complainTable").datagrid("reload",data); 
 	    }
 		
-		//拼接角色信息
-		function roleFormatter(value,row,index){
-			if (value.length > 0) {
-				var str = "";
-				for (var i = 0; i < value.length; i++) {
-					str += value[i].name + ", "
-				}
-				return str;
-			}else{
-				return "-";
-			}
-			
-		}
+		 
 		
 		$(function (){  
 			 //datagrid 组件
@@ -274,11 +290,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 		}) 
 		
-		$("#roles").tagbox({
-			width:'auto',
-			hasDownArrow:true,
-			panelMinWidth:150
-		}); 
+		 
 	</script>	  
 </body>
 </html>
