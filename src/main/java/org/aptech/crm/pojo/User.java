@@ -23,7 +23,7 @@ public class User implements Serializable {
 	
 	private String phone;	//电话
 	
-	@JSONField(format="yyyy-hh-dd")
+	@JSONField(format="yyyy-MM-dd")
 	private Date birthday;	//出生日期
 	
 	private List<Role> roles;

@@ -1,13 +1,14 @@
 package org.aptech.crm.pojo;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Address implements Serializable {
 	private Integer id;		//地址编号
 	
-	private String addName;	//地址名称
+	private String text;	//地址名称
 	
-	private Address address;	//父级实体类
+	private List<Address> children;	//父级实体类
 
 	public Integer getId() {
 		return id;
@@ -17,25 +18,24 @@ public class Address implements Serializable {
 		this.id = id;
 	}
 
-	public String getAddName() {
-		return addName;
+	public String getText() {
+		return text;
 	}
 
-	public void setAddName(String addName) {
-		this.addName = addName;
+	public void setText(String text) {
+		this.text = text;
 	}
 
-	public Address getAddress() {
-		return address;
+	public List<Address> getChildren() {
+		return children;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setChildren(List<Address> children) {
+		this.children = children;
 	}
 
 	@Override
 	public String toString() {
-		return "Address [id=" + id + ", addName=" + addName + ", address=" + address + "]";
+		return "Address [id=" + id + ", text=" + text + ", children=" + children + "]";
 	}
-	
 }

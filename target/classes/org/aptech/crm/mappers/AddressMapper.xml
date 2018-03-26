@@ -2,6 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.aptech.crm.dao.AddressDao">
 	<select id="getById" parameterType="int" resultType="org.aptech.crm.pojo.Address">
+<<<<<<< HEAD
+		select id,add_name as text from address where id = #{id}
+	</select>
+	
+	<resultMap type="org.aptech.crm.pojo.Address" id="addressMap" autoMapping="true">
+		<id column="id" property="id"/>
+		<collection property="children" javaType="java.util.List" ofType="Address" column="id" select="getCityAll">
+			<!-- <id column="id" property="id"/> -->
+		</collection>
+	</resultMap>
+	
+	<select id="getProvinceAll" parameterType="int" resultMap="addressMap">
+		select id,add_name as text from address where parent_id = #{parentId}
+	</select>
+	
+	<select id="getCityAll" parameterType="int" resultMap="addressMap">
+		select id,add_name as text,parent_id from address where parent_id = #{id}
+	</select>
+	
+	<select id="getCounty" resultType="org.aptech.crm.pojo.Address">
+		select * from address where id = #{id}
+	</select>
+	
+	<select id="getAll" resultType="org.aptech.crm.pojo.Address">
+		select id,add_name as text from address
+=======
 		select * from address where id = #{id}
 	</select>
 	
@@ -15,5 +41,6 @@
 	
 	<select id="getCounty" resultType="org.aptech.crm.pojo.Address">
 		select * from address where id = #{id}
+>>>>>>> branch 'master' of git@github.com:flyfly333/crm.git
 	</select>
 </mapper>
