@@ -57,13 +57,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	var complainResult = ["未处理","处理中","已完成"];
 	//处理结果的自定义列
 	function resultFormatter(value,row,index){
-		return "<img src = '/images/cl_"+row.compResult+".gif' title = '"+complainResult[row.compResult - 1]+"'/>";
+		return "<img src = '/images/cl_"+row.compResult+".gif' title = '"+complainResult[row.compResult]+"'/>";
 	} 
 	//紧急程度的数组
 	var complainDegree = ["普通","紧急","非常紧急"];
 	//紧急程度的自定义列
 	function degreeFormatter(value,row,index){
-		return "<img src = '/images/ts_"+row.compDegree+".gif' title = '"+complainDegree[row.compDegree - 1]+"'/>";
+		return "<img src = '/images/ts_"+row.compDegree+".gif' title = '"+complainDegree[row.compDegree]+"'/>";
 	}
 	//投诉类型的数组
     var complainType = ["产品投诉","服务投诉","客户意见","其他"];
@@ -76,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			return "-";
 		}
 	}
-	//返回部门名称
+	//返回客户名称
 	function customFormatter(value,row,index){
 		if (row != null && row.custom != null) {
 			return row.custom.shortName;
@@ -84,19 +84,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			return "-";
 		}
 	}
-	//返回职位名称
-	function postFormatter(value,row,index){
-		if (row != null) {
-			return row.post.postName;
-		}else{
-			return "-";
-		}
-	}
+	 
 	//修改用户方法
 	function edit_complain(){
 		var row = $("#complainTable").datagrid("getSelected");
 		if (row == null) {
-			alert("请选择用户!");
+			alert("请选择信息!");
 			return;
 		}
 		//选中最多的只保留最先选中的
@@ -104,30 +97,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$("#complainTable").datagrid("selectRecord",row.id);
 		var d = $("<div></div>").appendTo("body");
 		d.dialog({
-			title:'修改用户',
+			title:'修改投诉信息',
 			width:500,
 			height:'auto',
 			modal:true,
 			href:'complain/form',
 			onClose:function (){ $(this).dialog("destroy"); },
 			onLoad:function (){ 
-				$.post("complain/getUserById",{id:row.id},function (data){
-					console.log(data);
-					$("#complainForm").form("load",data);
-					var rids = new Array();
-					$.each(data.roles,function (){
-						rids.push(this.id); 
-					});
-					$("#rids").combobox("setValues",rids);
-					$("#post").combobox("setValue",data.post.id);
-					$("#dept").combobox("setValue",data.dept.id);
+				$.post("complain/getComplainById",{id:row.id},function (data){
+					$("#complainForm2").form("load",data);
+					$("#complainCustomId").combobox("setValue",data.custom.id);
+					$("#Stime").datetimebox("setValue",data.compTime);
 				})
 			},
 			buttons:[{
 				iconCls:"icon-ok",
 				text:"确定",
 				handler:function(){
-					$("#complainForm").form("submit",{
+					$("#complainForm2").form("submit",{
 						url : "complain/edit",
 						success : function(data){ 
 							console.log(data);
@@ -164,14 +151,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				 iconCls:'icon-ok',
 				 text:'确定',
 				 handler:function (){ 
-					 $("#complainFrom").form("submit",{
+					 
+					 console.log($("#complainForm2"));
+					  $("#complainForm2").form("submit",{
 						 url:'complain/add',
 						 success:function (data){
 							 alert("添加成功！");
 							 $("#complainTable").datagrid("reload");
 							 d.dialog("close");
 						 }
-					 })
+					 })  
 				 }
 			 },{
 				 iconCls:'icon-cancel',
@@ -183,38 +172,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 }]
 		 });
 	}
-	function add_complain(){
-		var d = $("<div></div>").appendTo("body");
-		d.dialog({
-			title:'添加用户',
-			width:500,
-			height:'auto',
-			modal:true,
-			href:'complain/form',
-			onClose:function (){ $(this).dialog("destroy"); },
-			buttons:[{
-				iconCls:'icon-ok',
-				text:'确定',
-				handler:function (){ 
-					//提交表单添加数据
-					$("#complainFrom").form("submit",{
-						url:'complain/add',
-						success:function (data){ 
-							alert("添加成功!"); 
-							$("#complainTable").datagrid("reload");
-							d.dialog("close");
-						}
-					}); 
-				}
-			}, {
-				iconCls:'icon-cancel',
-				text:'取消',
-				handler:function (){
-					d.dialog("close");
-				}
-			}]
-		})
-	}	 
+	  
 	//自定义弹框方法
 	function alert(message){
 		$.messager.show({

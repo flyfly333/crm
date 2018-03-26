@@ -57,6 +57,9 @@ public class ComplainController {
 	@ResponseBody
 	public Map<String, Object> add(Complain complain) {
 		Map<String , Object> map = new HashMap<>(); 
+		User user = new User();
+		user.setId(1);
+		complain.setUser(user);
 		//添加用户
 		complainDao.add(complain);
 		map.put("result", true);
@@ -79,10 +82,8 @@ public class ComplainController {
 	@RequestMapping("/edit")
 	@ResponseBody
 	public Map<String, Object> Update(Complain complain ){
-		 
 		Map<String, Object> map = new HashMap<>();
 		complainDao.update(complain);
-		 
 		map.put("result", true);
 		return map;
 	}

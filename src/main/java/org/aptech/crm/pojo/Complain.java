@@ -33,7 +33,7 @@ public class Complain implements Serializable {
 	private String feedback;    //客户反馈
 	
 	private User user; 			//创建人
-
+    
 	private String Stime;       //开始查询时间字符串
 	
 	private String Etime;        //结束查询时间字符串

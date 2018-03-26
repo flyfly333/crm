@@ -19,6 +19,7 @@ org\aptech\crm\controller\UserController.class
 org\aptech\crm\pojo\User.class
 org\aptech\crm\controller\DeptController.class
 org\aptech\crm\pojo\Dept.class
+org\aptech\crm\dao\AccessoryDao.class
 org\aptech\crm\controller\RoleController.class
 org\aptech\crm\controller\PostController.class
 org\aptech\crm\dao\TradeDao.class

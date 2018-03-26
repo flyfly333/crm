@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.aptech.crm.dao.AccessoryDao">
+	<insert id="add" parameterType="org.aptech.crm.pojo.Accessory"
+		useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		insert into Accessory(id,url,type,fileId)
+			values(  #{id},  #{url},  #{type},  #{fileId}  )
+	</insert>
+	
+	<update id="update" parameterType="org.aptech.crm.pojo.Accessory">
+		update Accessory set id = #{id},url = #{url},type = #{type},fileId = #{fileId}
+			where id = #{id}
+	</update>
+	
+	<delete id="deleteByIds" parameterType="java.lang.reflect.Array">
+		delete from Accessory where id in
+		<foreach collection="array" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+
+	<sql id="conditionSql">
+		<if test="condition != null">
+			<where>
+			</where>
+		</if>
+	</sql>
+	
+	<select id="getAll" resultType="org.aptech.crm.pojo.Accessory">
+		select * from Accessory
+	</select>
+	
+	<select id="getById" parameterType="int" resultType="org.aptech.crm.pojo.Accessory">
+		select * from Accessory where id = #{id}
+	</select>
+	
+	<select id="getListByCondition" resultType="org.aptech.crm.pojo.Accessory">
+		select * from Accessory
+			<include refid="conditionSql"></include>
+		order by ${column} ${orderBy}
+			limit #{start},#{limit}
+	</select>
+	<select id="getCountByCondition" resultType="int">
+		select count(1) from Accessory
+			<include refid="conditionSql"></include>
+	</select>
+</mapper>
