@@ -23,14 +23,14 @@
 					custom_name like concat('%',#{condition.customName},'%')
 				</if>
 				<if test="condition.customCtage != null and condition.customCtage != ''">
-					custom_ctage like concat('%',#{condition.customCtage},'%')
+					and custom_ctage like concat('%',#{condition.customCtage},'%')
 				</if>
-				<!-- <if test="startTime != null">
-					create_time &gt;= startTime
-					<if test="endTime != null">
-						create_time &lt;= endTime
-					</if>
-				</if> -->
+				<if test="startTime != null and startTime != ''">
+					and create_time &gt;= #{startTime}
+				</if>
+				<if test="endTime != null and endTime != ''">
+					and	create_time &lt;= #{endTime}
+				</if>
 			</where>
 		</if>
 	</sql>
@@ -42,13 +42,14 @@
 			limit #{start},#{limit}
 	</select>
 	
+	<!-- 最后一个参数给了一个固定值，后面改回来 -->
 	<insert id="add" parameterType="org.aptech.crm.pojo.Custom" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
 		insert into custom(custom_name,short_name,custom_type,trade,custom_scale,custom_ctage,custom_assess,custom_credit_grade,custom_rela_grade,custom_source,custom_address_id,custom_zip_code,custom_phone,custom_fax,custom_url,custom_address,custom_remark,user_id)
-			values(#{customName},#{shortName},#{customType},#{trade},#{customScale},#{customCtage},#{customAssess},#{customCreditGrade},#{customRelaGrade},#{customSource},#{address.id},#{customZipCode},#{customPhone},#{customFax},#{customUrl},#{customAddress},#{customRemark},#{user.id})
+			values(#{customName},#{shortName},#{customType},#{trade},#{customScale},#{customCtage},#{customAssess},#{customCreditGrade},#{customRelaGrade},#{customSource},#{address.id},#{customZipCode},#{customPhone},#{customFax},#{customUrl},#{customAddress},#{customRemark},1)
 	</insert>
 	
 	<update id="update" parameterType="org.aptech.crm.pojo.Custom">
-		update custom set custom_name = #{customName}, short_name = #{shortName}, custom_type = #{customType}, trade = #{trade}, custom_scale = #{customScale}, custom_ctage = #{customCtage}, custom_assess = #{customAssess}, custom_credit_grade = #{customCreditGrade}, custom_rela_grade = #{customRelaGrade}, custom_source = #{customSource}, custom_address_id = #{address.id}, custom_zip_code = #{customZipCode}, custom_phone = #{customPhone}, custom_fax = #{customFax}, custom_url = #{customUrl}, custom_address = #{customAddress}, custom_remark = #{customRemark}, user_id = #{user.id}
+		update custom set custom_name = #{customName}, short_name = #{shortName}, custom_type = #{customType}, trade = #{trade}, custom_scale = #{customScale}, custom_ctage = #{customCtage}, custom_assess = #{customAssess}, custom_credit_grade = #{customCreditGrade}, custom_rela_grade = #{customRelaGrade}, custom_source = #{customSource}, custom_address_id = #{address.id}, custom_zip_code = #{customZipCode}, custom_phone = #{customPhone}, custom_fax = #{customFax}, custom_url = #{customUrl}, custom_address = #{customAddress}, custom_remark = #{customRemark}, user_id = 1
 		where id = #{id}
 	</update>
 	
@@ -66,5 +67,9 @@
 	
 	<select id="getCount" resultType="int">
 		select count(1) from custom
+	</select>
+	
+	<select id="getAll" resultType="org.aptech.crm.pojo.Custom">
+		select * from custom
 	</select>
 </mapper>

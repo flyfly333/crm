@@ -15,25 +15,45 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
 		<script type="text/javascript">  
 			$(function(){
-				$("#customTable").datagrid({
+				$("#linkmanTable").datagrid({
 					pagination : true,
 					toolbar : "#tb",
 					idField : "id"
 				});
 			})
 			
+			function customFormatter(value,row,index){
+				if(value.length == 0){
+					return "-";
+				}
+				var str = value.customName;
+				return str;
+			}
+			function userFormatter(value,row,index){
+				if(value.length == 0){
+					return "-";
+				}
+				var str = value.userName;
+				return str;
+			}
+			
+			function typeFormatter(value,row,index){
+				if(value == 0){
+					return "联系人";
+				}
+				return "主联系人";
+			}
+			
 			function setCondition(){
-				var postData = {customName : $("#customName").val(),customCtage : $("#customCtage").combobox("getValue"),startTime : $("#startTime").val(), endTime : $("#endTime").val()};
-				
-				
-				$("#customTable").datagrid("reload",postData);
+				var postData = {name : $("#linkmanName").val(),"custom.id" : $("#custom_name").combobox("getValue")};
+				$("#linkmanTable").datagrid("reload",postData);
 			}
 		
 			function resetCondition(){
-				$("#customCondition").form("clear");
+				$("#linkmanCondition").form("clear");
 			}
 			
-			function add_custom(){
+			function add_linkman(){
 				var d = $("<div></div>").appendTo("body");
 				d.dialog({
 					title : "添加用户",
@@ -41,17 +61,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					width:500,
 					height:300,
 					modal:true,
-					href : "custom/toAddCustom",
+					href : "linkman/toAddlinkman",
 					onClose:function(){$(this).dialog("destroy"); },
 					buttons:[{
 						iconCls:"icon-ok",
 						text:"确定",
 						handler:function(){
 							$("#form1").form("submit",{
-								url : "custom/addCustom",
+								url : "linkman/addlinkman",
 								success : function(data){
 									d.dialog("close");
-									$("#customTable").datagrid("reload");
+									$("#linkmanTable").datagrid("reload");
 								}
 							});
 						}
@@ -65,15 +85,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				});
 			}
 			
-			function edit_custom(){
-				var row = $("#customTable").datagrid("getSelected");
+			function edit_linkman(){
+				var row = $("#linkmanTable").datagrid("getSelected");
 				if(row == null){
 					return;
 				}
 
 				//如果选中了多个，只保留row这个
-				$("#customTable").datagrid("clearSelections");
-				$("#customTable").datagrid("selectRecord",row.id);
+				$("#linkmanTable").datagrid("clearSelections");
+				$("#linkmanTable").datagrid("selectRecord",row.id);
 				
 				var d = $("<div></div>").appendTo("body");
 				d.dialog({
@@ -82,11 +102,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					width:500,
 					height:300,
 					modal:true,
-					href : "custom/toAddCustom",
+					href : "linkman/toAddlinkman",
 					onClose:function(){$(this).dialog("destroy"); },
 					onLoad:function(){
 						//发送异步请求，查询数据
-						$.post("custom/view",{id:row.id},function(data){
+						$.post("linkman/view",{id:row.id},function(data){
 							$("#form1").form("load",data);
 							$("#address_form").combotree("setValue",data.address.id);
 						});
@@ -96,10 +116,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						text:"确定",
 						handler:function(){
 							$("#form1").form("submit",{
-								url : "custom/edit",
+								url : "linkman/edit",
 								success : function(data){
 									d.dialog("close");
-									$("#customTable").datagrid("reload");
+									$("#linkmanTable").datagrid("reload");
 								}
 							});
 						}
@@ -113,9 +133,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				});
 			}
 			
-			function delete_custom(){
+			function delete_linkman(){
 				//1. 获取选中的数据，如果没有选中，则提示必须选中数据
-				var selRows = $("#customTable").datagrid("getSelections");
+				var selRows = $("#linkmanTable").datagrid("getSelections");
 				if(selRows.length == 0){
 					$.messager.alert("提示","请选择要删除的数据行！","warning");
 					return;
@@ -132,10 +152,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								postData += "&";
 							}
 						});
-						$.post("custom/batchDelete",postData,function(data){
+						$.post("linkman/batchDelete",postData,function(data){
 							if(data.result == true){
 								//4. 删除成功后，刷新表格 reload
-								$("#customTable").datagrid("reload");
+								$("#linkmanTable").datagrid("reload");
 							}
 						});
 					}
@@ -145,54 +165,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</head>  
 	<body>  
 		<h1>我的客户</h1>
-		<form id="customCondition">
+		<form id="linkmanCondition">
 			<div class="easyui-panel" title="设置查询条件" style="padding:15px 10px;">
-				客户名称 : <input type="text" name="customName" id="customName" />
-				客户阶段 : 
-				<select class="easyui-combobox" id="customCtage" name="customCtage" style="width:100px;">
-					<option style="height: 15px;" value="">&nbsp;</option>
-					<option value="售前跟踪">售前跟踪</option>
-					<option value="合同执行">合同执行</option>
-					<option value="售后服务">售后服务</option>
-					<option value="合同期满">合同期满</option>
-					<option value="意外终止">意外终止</option>
-				</select>
-				创建时间 : 
-				
-				<table style="display: inline-block;position: absolute;top: 126px;">
-					<tr>
-						<td>
-							<input class="easyui-datebox" id="startTime" name="startTime" data-options="sharedCalendar:'#cc'">
-						</td>
-						<td>至</td>
-						<td>
-							<input class="easyui-datebox" id="endTime" name="endTime" data-options="sharedCalendar:'#cc'">
-						</td>
-					</tr>
-				</table>
-				<div id="cc" class="easyui-calendar"></div>
+				联系人姓名 : <input type="text" name="name" id="linkmanName" />
+				对应客户 : 
+				<select id="custom_name" name = "customName" class="easyui-combobox" style="width:200px;" 
+					data-options="valueField:'id',textField:'customName',url:'custom/getAll'"></select>
 				<a id="btn" style="margin-left: 390px;" href="javascript:void(0)" onclick="setCondition();" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
 				<a id="btn" href="javascript:void(0)" onclick="resetCondition()" class="easyui-linkbutton" data-options="iconCls:'icon-undo'">重置</a>
 			</div>
 		</form>
-		<table class="easyui-datagrid" id="customTable" title="My Customer"
-				data-options="url:'custom/list',fitColumns:true,striped:true,rownumbers:true,iconCls:'icon-search'">
+		<table class="easyui-datagrid" id="linkmanTable" title="My Linkman"
+				data-options="url:'linkman/list',fitColumns:true,striped:true,rownumbers:true,iconCls:'icon-search'">
 			<thead>
 				<tr>
 					<th data-options="field:'tyu',checkbox:true"></th>
 					<th data-options="field:'id',width:80,align:'center'">编号</th>
-					<th data-options="field:'shortName',width:80,align:'center'">助记简称</th>
-					<th data-options="field:'customName',width:100,align:'center'">客户名称</th>
-					<th data-options="field:'customCtage',width:80,align:'center'">客户阶段</th>
-					<th data-options="field:'customType',width:80,align:'center'">客户种类</th>
-					<th data-options="field:'createTime',width:200,align:'center'">创建时间</th>
+					<th data-options="field:'name',width:80,align:'center'">联系人姓名</th>
+					<th data-options="field:'workPhone',width:100,align:'center'">工作电话</th>
+					<th data-options="field:'movePhone',width:80,align:'center'">移动电话</th>
+					<th data-options="field:'email',width:80,align:'center'">邮件地址</th>
+					<th data-options="field:'type',width:80,align:'center',formatter:typeFormatter">联系人类型</th>
+					<th data-options="field:'custom',width:200,align:'center',formatter:customFormatter">对应客户</th>
+					<th data-options="field:'user',width:80,align:'center',formatter:userFormatter">创建人</th>
 				</tr>
 			</thead>
 		</table>
 		<div id="tb">
-			<a href="javascript:void(0)" class="easyui-linkbutton" onclick="add_custom();" data-options="iconCls:'icon-add',plain:true">添加</a>
-			<a href="javascript:void(0)" class="easyui-linkbutton" onclick="edit_custom();" data-options="iconCls:'icon-edit',plain:true">修改</a>
-			<a href="javascript:void(0)" class="easyui-linkbutton" onclick="delete_custom();" data-options="iconCls:'icon-remove',plain:true">删除</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton" onclick="add_linkman();" data-options="iconCls:'icon-add',plain:true">添加</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton" onclick="edit_linkman();" data-options="iconCls:'icon-edit',plain:true">修改</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton" onclick="delete_linkman();" data-options="iconCls:'icon-remove',plain:true">删除</a>
 			<!-- <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true">导出</a>
 			<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-sum',plain:true">批量导入</a> -->
 		</div>

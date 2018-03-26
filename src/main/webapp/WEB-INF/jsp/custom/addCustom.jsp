@@ -9,12 +9,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<head>  
 		<base href="<%=basePath%>">  
 		<meta http-equiv="Content-Type" content="textml; charset=UTF-8">  
+		<link rel="stylesheet" type="text/css" href="easyui/themes/material/easyui.css">
+		<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">
+		<script type="text/javascript" src="easyui/jquery.min.js"></script> 
+		<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
 		<script type="text/javascript">  
   
 		</script>  
 	</head>  
 	<body class="main"><!--  onload="select_type()" -->
-    <form method="post" action="" id="form1" enctype="multipart/form-data">
+    <form method="post" action="" id="form1">
 		<div class="aspNetHidden">
 			<input type="hidden" name="id">
 		</div>
@@ -174,30 +179,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="form-item">省份：
+                                        <td class="form-item">地址：
                                         </td>
                                         <td>
-                                            <select class="easyui-combobox" name="address.name" style="width:100px;">
-												<option style="height: 15px;" value="">&nbsp;</option>
-												<c:forEach items="${province }" var="pro">
-													<option value="${pro.id }">${pro.name }</option>
-												</c:forEach>
-											</select>
-                                        </td>
-                                        <td class="form-item">电话：
-                                        </td>
-                                        <td>
-                                            <input name="customPhone" type="text" id="Dianhua" style="width:90%;">
+											<select id="address_form" name = "address.id" class="easyui-combotree" style="width:100%;" 
+											data-options="valueField:'id',textField:'name',url:'address/getProAll',required:true"></select>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="form-item">城市：
+                                    	<td class="form-item">电话：
                                         </td>
                                         <td>
-                                            <select class="easyui-combobox" name="address.name" style="width:100px;">
-												<option style="height: 15px;" value="">&nbsp;</option>
-												<!-- 异步获取城市 -->
-											</select>
+                                            <input name="customPhone" type="text" id="Dianhua" style="width:90%;">
                                         </td>
                                         <td class="form-item">传真：
                                         </td>
@@ -206,13 +199,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="form-item">县区：
+                                    	<td class="form-item">邮编：
                                         </td>
                                         <td>
-                                            <select class="easyui-combobox" name="address.name" style="width:100px;">
-												<option style="height: 15px;" value="">&nbsp;</option>
-												<!-- 异步获取县区 -->
-											</select>
+                                            <input name="customZipCode" type="text" id="YouBian" style="width:90%;">
                                         </td>
                                         <td class="form-item">网址：
                                         </td>
@@ -221,15 +211,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="form-item">邮编：
-                                        </td>
-                                        <td>
-                                            <input name="customZipCode" type="text" id="YouBian" style="width:90%;">
-                                        </td>
                                         <td class="form-item">地址：
                                         </td>
                                         <td>
-                                            <input name="customAddress" type="text" id="Dizhi" style="width:90%;">
+                                            <input name="customAddress" type="text" id="Dizhi" style="width:100%;">
                                         </td>
                                     </tr>
                                     <tr>
@@ -251,68 +236,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </td>
             </tr>
         </tbody></table>
-        <input name="SharingUserZd" type="text" id="SharingUserZd" style="display: none">
-        <input name="SharingUserKx" type="text" id="SharingUserKx" style="display: none">
-        <input name="Number" type="text" value="2018322101357884678" id="Number" style="display: none">
-        <script language="javascript">
-            var wName_1;
-            function opengx1() {
-                var num = Math.random();
-                var str = "" + document.getElementById('SharingUserZd').value + "";
-
-                //browser
-                var bstr = getBrowserType();
-                if (bstr == '3' | bstr == '4' | bstr == '5') {
-                    window.open("../../Choose/crm/Xzyh.aspx?tmp=" + num + "&requeststr=" + str + "", 'window', 'height=580,width=750,top=150,left=300,toolbar=no,menubar=no,scrollbars=yes, resizable=yes,location=no, status=no');
-                }
-                else {
-                    wName_1 = window.showModalDialog("../../choose/crm/Xzyh.aspx?tmp=" + num + "&requeststr=" + str + "", "window", "dialogWidth:750px;DialogHeight=580px;status:no;scroll=yes;help:no");
-                }
-
-                var arr = wName_1.split("|");
-                for (var i = 0; i < arr.length; i++) {
-                    document.getElementById("SharingUserZd").value = arr[0];
-                    document.getElementById("SharingNameZd").value = arr[1];
-                }
-            }
-
-            function setValue_staff(str) {
-                var arr = str.split("|");
-                for (var i = 0; i < arr.length; i++) {
-                    document.getElementById("SharingUserZd").value = arr[0];
-                    document.getElementById("SharingNameZd").value = arr[1];
-                }
-            }
-
-            var wName_2;
-            function opengx2() {
-                var num = Math.random();
-                var str = "" + document.getElementById('SharingUserKx').value + "";
-
-                //browser
-                var bstr = getBrowserType();
-                if (bstr == '3' | bstr == '4' | bstr == '5') {
-                    window.open("../../Choose/crm/Xzyh2.aspx?tmp=" + num + "&requeststr=" + str + "", 'window', 'height=580,width=750,top=150,left=300,toolbar=no,menubar=no,scrollbars=yes, resizable=yes,location=no, status=no');
-                }
-                else {
-                    wName_2 = window.showModalDialog("../../choose/crm/Xzyh2.aspx?tmp=" + num + "&requeststr=" + str + "", "window", "dialogWidth:750px;DialogHeight=580px;status:no;scroll=yes;help:no");
-                }
-
-                var arr = wName_2.split("|");
-                for (var i = 0; i < arr.length; i++) {
-                    document.getElementById("SharingUserKx").value = arr[0];
-                    document.getElementById("SharingNameKx").value = arr[1];
-                }
-            }
-
-            function setValue_staff2(str) {
-                var arr = str.split("|");
-                for (var i = 0; i < arr.length; i++) {
-                    document.getElementById("SharingUserKx").value = arr[0];
-                    document.getElementById("SharingNameKx").value = arr[1];
-                }
-            }
-        </script>
     </form>
 
 

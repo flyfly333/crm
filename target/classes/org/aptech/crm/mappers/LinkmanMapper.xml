@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.aptech.crm.dao.LinkmanDao">
+	<resultMap type="org.aptech.crm.pojo.Linkman" id="linkmanMap" autoMapping="true">
+		<id column="id" property="id"/>
+		<association property="user" javaType="org.aptech.crm.pojo.User" column="create_user_id" select="org.aptech.crm.dao.UserDao.getById">
+			<id column="id" property="id"/>
+		</association>
+		<association property="custom" javaType="org.aptech.crm.pojo.Custom" column="custom_id" select="org.aptech.crm.dao.CustomDao.getById">
+			<id column="id" property="id"/>
+		</association>
+	</resultMap>
+	
+	<sql id="conditionSql">
+		<if test="condition != null">
+			<where>
+				<if test="condition.name != null and condition.name != ''">
+					name like concat('%',#{condition.name},'%')
+				</if>
+				<if test="condition.custom != null">
+					<if test="condition.custom.id != null and condition.custom.id != ''">
+						and custom_id = #{condition.custom.id}
+					</if>
+				</if>
+			</where>
+		</if>
+	</sql>
+	
+	<select id="getById" parameterType="int" resultMap="linkmanMap">
+		select * from linkman where id = #{id}
+	</select>
+	
+	<select id="getListByCondition" resultMap="linkmanMap">
+		select * from linkman
+			<include refid="conditionSql"></include>
+		order by ${column} ${orderBy}
+			limit #{start},#{limit}
+	</select>
+	
+	<!-- 最后一个参数给了一个固定值，后面改回来 -->
+	<insert id="add" parameterType="org.aptech.crm.pojo.Linkman" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		insert into custom(custom_id,name,sex,service,title,section,post,type,work_phone,email,move_phone,qq,home_address,birthday,hobby,remark,create_user_id)
+			values(#{custom.id},#{name},#{sex},#{service},#{title},#{section},#{post},#{type},#{workPhone},#{email},#{movePhone},#{QQ},#{homeAddress},#{birthday},#{hobby},#{remark},1)
+	</insert>
+	
+	<update id="update" parameterType="org.aptech.crm.pojo.Linkman">
+		update custom set custom_id = #{custom.id}, name = #{name}, sex = #{sex}, service = #{service}, title = #{title}, section = #{section}, post = #{post}, type = #{type}, work_phone = #{workPhone}, email = #{email}, move_phone = #{movePhone}, qq = #{QQ}, home_address = #{homeAddress}, birthday = #{birthday}, hobby = #{hobby}, remark = #{remark}, create_user_id = 1
+		where id = #{id}
+	</update>
+	
+	<delete id="deleteByIds" parameterType="java.lang.reflect.Array">
+		delete from linkman where id in
+		<foreach collection="array" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<select id="getCountByCondition" resultType="int">
+		select count(1) from linkman
+		<include refid="conditionSql"></include>
+	</select>
+	
+	<select id="getCount" resultType="int">
+		select count(1) from linkman
+	</select>
+</mapper>

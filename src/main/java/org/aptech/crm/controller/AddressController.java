@@ -24,12 +24,17 @@ public class AddressController {
 	
 	@RequestMapping("/getProAll")
 	@ResponseBody
-	public Map<String, Object> selectProvinceAll(Integer parentId) throws Exception{
-		Map<String, Object> map = new HashMap<>();
+	public List<Address> selectProvinceAll(Integer parentId) throws Exception{
 		
-		List<Address> list = addressDao.getProvinceAll(parentId);
-		map.put("province", list);
+		List<Address> list = addressDao.getProvinceAll(0);
 		
-		return map;
+		return list;
+	}
+	
+	@RequestMapping("/getAll")
+	@ResponseBody
+	public List<Address> selectAll() throws Exception{
+		List<Address> list = addressDao.getAll();
+		return list;
 	}
 }

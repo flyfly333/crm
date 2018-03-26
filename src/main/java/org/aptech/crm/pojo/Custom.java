@@ -44,7 +44,7 @@ public class Custom implements Serializable {
 	
 	private String customRemark;	//备注
 	
-	@JSONField(format="yyyy-hh-dd HH:mm:ss")
+	@JSONField(format="yyyy-MM-dd HH:mm:ss")
 	private Date createTime;		//创建时间
 	
 	private User user;		//用户实体类（跟踪进行项目的用户）
