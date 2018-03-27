@@ -23,6 +23,11 @@ public class LogController {
 		this.logDao = logDao;
 	}
  
+	@RequestMapping("/main")
+	public String index2() {
+		return "main/main";
+	}
+	
 	@RequestMapping("/index")
 	public String index() {
 		return "log/index";
