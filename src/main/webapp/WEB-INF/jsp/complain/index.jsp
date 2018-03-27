@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	<base href="<%=basePath %>">
 	<meta charset="UTF-8">
 	<title>complain List</title>
-	 <jsp:include page="/commont.jsp"></jsp:include>
+	<jsp:include page="/commont.jsp"></jsp:include>
 </head>
 <body>
 <div id="condition" class = "easyui-panel" title = "查询条件">
@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<thead>
 			<th data-options = "field:'abc',width:30,checkbox:true"></th>
 			<th data-options = "field:'id',width:30,sortable:true,order:'desc',align:'center'">编号</th>
-			<th data-options = "field:'compTheme',width:250">投诉主题</th>
+			<th data-options = "field:'compTheme',width:250,formatter:themeFormatter">投诉主题</th>
 			<th data-options = "field:'aaa',width:50,formatter:customFormatter,align:'center'">对应客户</th>
 			<th data-options = "field:'compType',width:40,formatter:typeFormatter,align:'center'">投诉分类</th>
 			<th data-options = "field:'compTime',width:100,align:'center'">投诉时间</th>
@@ -45,6 +45,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 <script type="text/javascript">
 
+	//创建主题自定义列
+	function themeFormatter(value,row,index){
+		console.log(row.id);
+		if (row == null) {
+			return "-";
+		}
+		return "<a href = 'complain/detail?id="+row.id+"'>"+row.compTheme+"</a>"
+	}
 	//创建人自定义列
 	function userFormatter(value,row,index){
 		if (row != null && row.user != null) {
@@ -141,7 +149,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function add_complain(){
 		 var d = $("<div></div>").appendTo("body");
 		 d.dialog({
-			 title:'添加用户',
+			 title:'添加投诉信息',
 			 width:500,
 			 height:500,
 			 modal:true,

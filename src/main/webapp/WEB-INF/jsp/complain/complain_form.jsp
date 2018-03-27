@@ -46,12 +46,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 <input type = "text" class="easyui-textbox" name = "feedback" style = "width: 220px"/>
 		</div>
 		<div class = "item"> <span>紧急程度:  </span>
-			 <input type="radio" name="compDegree" value="0" checked="checked">普通
+			 <input type="radio" name="compDegree" value="0" >普通
 			 <input type="radio" name="compDegree" value="1">紧急
 			 <input type="radio" name="compDegree" value="2">非常紧急
 		</div>
 		 <div class = "item"> <span>处理结果:  </span>
-			 <input type="radio" name="compResult" value="0" checked="checked">未处理
+			 <input type="radio" name="compResult" value="0">未处理
 			 <input type="radio" name="compResult" value="1">处理中
 			 <input type="radio" name="compResult" value="2">处理完成
 		</div> 

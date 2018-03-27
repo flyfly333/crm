@@ -16,4 +16,10 @@
 			text-align: right;
 			margin-right: 10px;
 		}
-	</style>
+		.form { border-top: 3px solid #CC6600;  border-bottom: 1px solid #CC6600;  background-color: #FFFFFF;  border-collapse: collapse; }
+		table { font-size: 12pt; }
+		tr {  display: table-row;  vertical-align: inherit; border-color: inherit; }
+		table.form td {  border-bottom: 1px solid #C0C0C0;  padding: 5px; }
+		.form-item { background-color: #fafafa; text-align: right;  border-top: 1px solid #C0C0C0;  border-left: 1px solid #C0C0C0; border-right: 1px solid #C0C0C0; }
+		
+	</style> 

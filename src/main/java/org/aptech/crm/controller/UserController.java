@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Update;
 import org.apache.shiro.crypto.hash.Md5Hash;  
 import org.aptech.crm.dao.UserDao;
 import org.aptech.crm.pojo.User;
+import org.aptech.crm.utils.record;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping; 
 import org.springframework.web.bind.annotation.RequestParam;  
@@ -73,6 +74,7 @@ public class UserController {
 	
 	@RequestMapping("/list")
 	@ResponseBody
+	@record(actionType = "执行了查询操作",businessLogic="查询的是用户列表")
 	public Map<String,Object> getListByCondition(@RequestParam(defaultValue="1")Integer page,@RequestParam(defaultValue="10")Integer rows,User user,@RequestParam(defaultValue="id")String sort,@RequestParam(defaultValue = "asc")String order){
 		System.out.println(user.getUserName());
 		System.out.println();

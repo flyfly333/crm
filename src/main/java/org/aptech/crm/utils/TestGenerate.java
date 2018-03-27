@@ -3,6 +3,8 @@ package org.aptech.crm.utils;
 import org.aptech.crm.pojo.Accessory;
 import org.aptech.crm.pojo.Complain;
 
+import com.mysql.jdbc.log.Log;
+
 public class TestGenerate {
 
 	public static void main(String[] args) {

@@ -4,20 +4,60 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class Log implements Serializable {
 	private Integer id;		//编号
 	
 	private User user;		//用户实体类
 	
-	private String ipAddress;	//ip地址
+	private String ip;	//ip地址
 	
-	private Date dateline;		//操作时间
+	@JSONField(format="yyyy-MM-dd hh:mm:ss")
+	private Date logTime;		//操作时间
 	
-	private String content;		//日志内容
+	private String logContext;		//日志内容
 	
 	private String moduleName;	//模块名称
 	
 	private List<Accessory> accessories;	//属于他的附件编号
+
+	private String SlogTime;           //开始时间 //查询条件
+	
+	private String ElogTime;			//结束时间
+	
+	private String userName;            //操作人账号
+	
+	
+	
+	
+	
+
+	
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getSlogTime() {
+		return SlogTime;
+	}
+
+	public void setSlogTime(String slogTime) {
+		SlogTime = slogTime;
+	}
+
+	public String getElogTime() {
+		return ElogTime;
+	}
+
+	public void setElogTime(String elogTime) {
+		ElogTime = elogTime;
+	}
 
 	public Integer getId() {
 		return id;
@@ -35,28 +75,39 @@ public class Log implements Serializable {
 		this.user = user;
 	}
 
-	public String getIpAddress() {
-		return ipAddress;
+	 
+
+	public String getIp() {
+		return ip;
 	}
 
-	public void setIpAddress(String ipAddress) {
-		this.ipAddress = ipAddress;
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 
 	public Date getDateline() {
-		return dateline;
+		return logTime;
 	}
 
 	public void setDateline(Date dateline) {
-		this.dateline = dateline;
+		this.logTime = dateline;
 	}
 
-	public String getContent() {
-		return content;
+
+	public Date getLogTime() {
+		return logTime;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setLogTime(Date logTime) {
+		this.logTime = logTime;
+	}
+
+	public String getLogContext() {
+		return logContext;
+	}
+
+	public void setLogContext(String logContext) {
+		this.logContext = logContext;
 	}
 
 	public String getModuleName() {
@@ -77,8 +128,12 @@ public class Log implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Log [id=" + id + ", user=" + user + ", ipAddress=" + ipAddress + ", dateline=" + dateline + ", content="
-				+ content + ", moduleName=" + moduleName + ", accessories=" + accessories + "]";
+		return "Log [id=" + id + ", user=" + user + ", ip=" + ip + ", logTime=" + logTime + ", logContext=" + logContext
+				+ ", moduleName=" + moduleName + ", accessories=" + accessories + ", SlogTime=" + SlogTime
+				+ ", ElogTime=" + ElogTime + "]";
 	}
+
+	
+
 	
 }

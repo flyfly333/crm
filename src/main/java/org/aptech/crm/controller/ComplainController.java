@@ -14,6 +14,7 @@ import org.aptech.crm.dao.UserDao;
 import org.aptech.crm.pojo.Complain;
 import org.aptech.crm.pojo.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping; 
 import org.springframework.web.bind.annotation.RequestParam;  
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,6 +36,12 @@ public class ComplainController {
 	@RequestMapping("/index")
 	public String index() {
 		return "complain/index";
+	}
+	
+	@RequestMapping("/detail")
+	public String detail(ModelMap modelMap,Integer id) {
+		modelMap.put("detailComplain", complainDao.getById(id));
+		return "complain/detail";
 	}
 	
 	@RequestMapping("/getComplainById")

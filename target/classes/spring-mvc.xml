@@ -13,12 +13,12 @@
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 	
-	<!-- <mvc:interceptors>
+	 <mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
 			<bean class="org.aptech.crm.utils.LogInterceptor"></bean>
 		</mvc:interceptor>
-	</mvc:interceptors> -->
+	</mvc:interceptors>  
 	
 	<mvc:annotation-driven>
 		<!-- 整合FastJson插件 -->

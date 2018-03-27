@@ -3,6 +3,7 @@ package org.aptech.crm.utils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -28,8 +29,14 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 	 */
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
-		// TODO Auto-generated method stub
+		ModelAndView modelAndView) throws Exception {
+//		HandlerMethod method = (HandlerMethod)handler;
+//		
+//		record re = method.getMethodAnnotation(record.class);
+//		if (re != null) {
+//			System.out.println("动作类型是：" + re.actionType() );
+//			System.out.println("业务逻辑是：" + re.businessLogic());
+//		}
 		super.postHandle(request, response, handler, modelAndView);
 	}
 	
@@ -40,17 +47,18 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-		String ip = ProjectUtils.getIP(request);
-		String requestUrl = request.getRequestURL().toString();
-		if (requestUrl.indexOf("user/index") > 0) {
-			System.out.println("访问了user/index 页面");
-		}
-		System.out.println("handler" + handler.toString());
-        System.out.println("请求地址：" + requestUrl);
-		System.out.println(""  + request.getContextPath());
-        
-        //System.out.println("gameover!!!");
-		System.out.println(request.getRemoteAddr());
+		
+		
+		
+//		String ip = ProjectUtils.getIP(request);
+//		String requestUrl = request.getRequestURL().toString();
+//		if (requestUrl.indexOf("user/index") > 0) {
+//			System.out.println("访问了user/index 页面");
+//		} 
+//		System.out.println("handler" + handler.toString());
+//        System.out.println("请求地址：" + requestUrl);
+//		System.out.println(""  + request.getContextPath());
+//		System.out.println(request.getRemoteAddr());
 		 
 	}
 }
