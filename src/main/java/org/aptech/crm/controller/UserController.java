@@ -13,7 +13,8 @@ import org.aptech.crm.dao.UserDao;
 import org.aptech.crm.pojo.User;
 import org.aptech.crm.utils.record;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping; 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod; 
 import org.springframework.web.bind.annotation.RequestParam;  
 import org.springframework.web.bind.annotation.ResponseBody;
 /**
@@ -34,6 +35,18 @@ public class UserController {
 	@RequestMapping("/index")
 	public String index() {
 		return "user/index";
+	}
+	
+	@RequestMapping(value = "/login",method = RequestMethod.POST)
+	public String login() {
+		System.out.println("认证没通过吧！");
+		return "main/main";
+	}
+	
+	@RequestMapping(value = "/login",method = RequestMethod.GET)
+	public String login2() {
+		System.out.println("认证了啊");
+		return "main/login";
 	}
 	
 	@RequestMapping("/getUserById")
@@ -72,6 +85,11 @@ public class UserController {
 		return "user/user_form";
 	}
 	
+	@RequestMapping("/main")
+	public String main() {
+		return "main/main";
+	}
+	
 	@RequestMapping("/list")
 	@ResponseBody
 	@record(actionType = "执行了查询操作",businessLogic="查询的是用户列表")
@@ -108,8 +126,10 @@ public class UserController {
 	@RequestMapping("/getByName")
 	@ResponseBody
 	public Map<String, Object> selectByName(String username, String password) throws Exception{
+		 
 		Map<String, Object> map = new HashMap<>();
 		User user = userDao.selectByName(username);
+		System.out.println(user);
 		if(username == "" || password == "") {
 			map.put("info", "请填写账号或密码！");
 		}else {

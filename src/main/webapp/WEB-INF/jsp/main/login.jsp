@@ -16,22 +16,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="login.css" type="text/css" />
 	<script type="text/javascript" src="easyui/jquery.min.js"></script>
 	<script type="text/javascript">
-		$(function(){
+		/* $(function(){
 			$("#submit").click(function(){
 				var username = $("#username").val();
 				var password = $("#password").val();
-				$.post("user/getByName",{"username" : username , "password" : password},function(data){
-					alert(data.info);
+				$.post("user/login",{"username" : username , "password" : password},function(){
+					 console.log("chenggong")
 				})
 			});
-		})
+		}) */
 	</script>
 	
 	</head>
 
 	<body>
 		<div id="container">
-			<form id="form" action="" method="post">
+			<form id="form" action="user/login" method="post">
 				<div class="login">联想后台统登录</div>
 				<div class="username-text">用户名:</div>
 				<div class="password-text">密码:</div>
@@ -44,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<input type="checkbox" id="remember-me" /><label for="remember-me">记住我</label>
 				
 				<div class="forgot-usr-pwd"></div>
-				<input type="submit" id="submit" name="submit" value="GO" />
+				<input type="submit" id="submit"  />
 			</form>
 		</div>
 	</body>

@@ -36,7 +36,21 @@ public class User implements Serializable {
 	
 	private String salt;	//盐值
 
-	 
+	private List<Permission> permissions;
+	
+	
+
+public List<Permission> getPermissions() {
+		return permissions;
+	}
+
+
+
+	public void setPermissions(List<Permission> permissions) {
+		this.permissions = permissions;
+	}
+
+
 
 public Integer getId() {
 		

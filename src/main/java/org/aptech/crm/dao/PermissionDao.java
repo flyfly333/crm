@@ -24,4 +24,6 @@ public interface PermissionDao extends CommonDao<Permission, Integer> {
 	void allotPer(@Param("roleId")Integer roleId,@Param("ids")Integer [] perIds);
 	
 	void deletePerRela(Integer id);
+	
+	List<Permission> getPersByUserId(Integer userId);
 }

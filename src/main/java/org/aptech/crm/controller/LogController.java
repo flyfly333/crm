@@ -1,9 +1,13 @@
 package org.aptech.crm.controller;
 import java.util.HashMap;
 import java.util.Map;
-import javax.annotation.Resource; 
+import javax.annotation.Resource;
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+import javax.servlet.http.HttpServletRequest;
+
 import org.aptech.crm.dao.LogDao;
 import org.aptech.crm.pojo.Log;
+import org.aptech.crm.pojo.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping; 
 import org.springframework.web.bind.annotation.RequestParam;  
@@ -24,7 +28,9 @@ public class LogController {
 	}
  
 	@RequestMapping("/main")
-	public String index2() {
+	public String index2(HttpServletRequest request) {
+		User user = new User();
+		request.getSession().setAttribute("login_user", user);
 		return "main/main";
 	}
 	

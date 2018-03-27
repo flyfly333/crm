@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.aptech.crm.dao.CustomDao;
 import org.aptech.crm.dao.LogDao;
 import org.aptech.crm.pojo.Custom;
@@ -30,6 +31,8 @@ public class test {
 
 	@Test
 	public void test() {
+		Md5Hash md5 = new Md5Hash("123456","qwe",2);
+		System.out.println(md5.toString());
 //		Log log = new Log();
 //		User user = new User();
 //		user.setId(1);

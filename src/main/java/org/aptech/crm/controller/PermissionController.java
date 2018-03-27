@@ -31,7 +31,6 @@ public class PermissionController {
 	@RequestMapping("/getById")
 	@ResponseBody
 	public Permission getById(Integer id) {
-		System.out.println(permissionDao.getById(id));
 		return permissionDao.getById(id);
 	}
 	

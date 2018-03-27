@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- shiro 的web过滤器 -->
+	<bean id = "shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="loginUrl" value="/user/login"></property>
+		<property name="unauthorizedUrl" value="/refuse.jsp"></property>
+		<property name="securityManager" ref="securityManager"></property>
+		<property name="successUrl" value="/user/main"></property>
+		<!-- shiro的过滤器链配置 -->
+		<property name="filterChainDefinitions">
+			<value>
+				/user/logout = logout
+				<!-- 配置匿名访问 -->
+				/js/** = anon
+				/images/** = anon
+				/css/** = anon
+				/refuse.jsp = anon
+				/fonts/** = anon 
+				<!-- 所有的地址都需要身份认证 -->
+				/** = authc
+			</value>
+		</property>
+	</bean>
+	<!-- 安全管理器 -->
+	<bean id = "securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager" >
+		<property name="realm" ref="userRealm"></property>
+	</bean>	
+	<!-- 自定义Realm -->
+	<bean id = "userRealm" class="org.aptech.crm.realms.CustomRealm">
+		<property name="userDao" ref="userDao"></property>
+		<property name="permissionDao" ref = "permissionDao"></property> 
+	</bean>
+	<!-- 自定义authc 过滤器-->
+	<bean id = "myFilter" class="org.aptech.crm.utils.MyFromAutheticationFilter"></bean>
+	
+	
+	<!-- 凭证匹配器 -->
+	<bean id = "credentialMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+		<property name="hashAlgorithmName" value="md5"></property>
+		<property name="hashIterations" value="1"></property>
+	</bean>
+		
+		
+		
+		
+
+</beans>

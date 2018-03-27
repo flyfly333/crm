@@ -4,6 +4,27 @@
 						http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	version="3.0">
   <display-name>Archetype Created Web Application</display-name>
+  <!-- 配置shiro -->
+  <filter>
+  	<filter-name>shiroFilter</filter-name>
+  	<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  	<!-- 设置由servlet负责filter的生命周期 -->
+  	<init-param>
+  		<param-name>targetFilterLifecycle</param-name>
+  		<param-value>true</param-value>
+  	</init-param>
+  	<!-- 设置spring容器filter的bean id 不设置找同名的bean -->
+  	<init-param>
+  		<param-name>targetBeanName</param-name>
+  		<param-value>shiroFilter</param-value>
+  	</init-param>
+  </filter>
+  <filter-mapping>
+  		<filter-name>shiroFilter</filter-name>
+  		<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  
   
   <!-- 监听器配置：用于实例化spring容器 -->
   <listener>
@@ -12,7 +33,7 @@
   <!-- 通过上下文参数来指定spring配置文件的路径和名称 -->
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:applicationContext-mybatis.xml</param-value>
+    <param-value>classpath:applicationContext-mybatis.xml,classpath:applicationContext-shiro.xml</param-value>
   </context-param>
   
   <!-- springMVC的核心控制器：DispatcherServlet
