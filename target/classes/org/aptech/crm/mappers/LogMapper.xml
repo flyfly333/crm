@@ -8,6 +8,11 @@
 			#{item}
 		</foreach>
 	</delete>
+	<!-- 添加系统日志方法 -->
+	<insert id="add" parameterType="Log" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		INSERT INTO LOG (user_id,user_name,module_name,log_context,log_time,ip)
+			VALUES(#{user.id},#{user.userName},#{moduleName},#{logContext},#{logTime},#{ip})
+	</insert>
 
 	<sql id="conditionSql">
 		<if test="condition != null">

@@ -37,11 +37,18 @@ public class LogController {
 		return map;
 	}
 	 
-	  
+	@RequestMapping("/add")
+	@ResponseBody
+	public Map<String, Object> add(Log log){
+		Map<String, Object> map = new HashMap<>();
+		logDao.add(log);
+		map.put("result", true);
+		return map;
+	}  
+	
 	@RequestMapping("/list")
 	@ResponseBody
 	public Map<String,Object> getListByCondition(@RequestParam(defaultValue="1")Integer page,@RequestParam(defaultValue="10")Integer rows,Log log,@RequestParam(defaultValue="id")String sort,@RequestParam(defaultValue = "asc")String order){
-		System.out.println(log);
 		int start = (page - 1)*rows;
 		Map<String,Object> map = new HashMap<>(); 
 		map.put("total",logDao.getCountByCondition(log));

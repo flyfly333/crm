@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.alibaba.fastjson.annotation.JSONField;
 
 public class Log implements Serializable {
@@ -14,6 +16,7 @@ public class Log implements Serializable {
 	private String ip;	//ip地址
 	
 	@JSONField(format="yyyy-MM-dd hh:mm:ss")
+	@DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
 	private Date logTime;		//操作时间
 	
 	private String logContext;		//日志内容
@@ -28,13 +31,7 @@ public class Log implements Serializable {
 	
 	private String userName;            //操作人账号
 	
-	
-	
-	
-	
-
-	
-
+	 
 	public String getUserName() {
 		return userName;
 	}
