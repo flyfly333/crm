@@ -241,7 +241,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 		//设置查询条件
 		function setUserCondition(){ 
-		var data = {username:$("#username").val()}; 
+		var data = {userName:$("#username").val()}; 
 		var ids = $("#roles").combobox("getValues");
 		for (var i = 0; i < ids.length; i++) {
 			console.log(ids[i]);

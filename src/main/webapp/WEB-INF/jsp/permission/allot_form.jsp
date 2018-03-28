@@ -15,16 +15,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 	 	$(function (){
 	 		$.post("permission/getPerIdsByRid",{rid:${rid}},function(data){
-	 			console.log(data);
 	 			    $("#allotTree").tree({
-	 				url:'permission/all',
+	 				url:'permission/list',
 	 				checkbox:true,
 	 				loadFilter:function(d){  
-	 						for (var i = 1; i < d.length; i++) {
+	 						for (var i = 0; i < d.length; i++) {
 		 						$.each(d[i].children,function (){
-		 							if ($.inArray(this.id,data) >= 0) {
-		 							     this.checked = true;
-									}
+		 							$.each(this.children,function (){
+		 								if ($.inArray(this.id,data) >= 0) {
+			 							     this.checked = true;
+										}
+		 							})
+		 							
 		 						})
 	 						 }
 	 					return d;

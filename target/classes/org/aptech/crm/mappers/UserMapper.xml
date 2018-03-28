@@ -42,8 +42,8 @@
 	<sql id="conditionSql">
 		<if test="condition != null">
 			<where>
-				<if test="condition.username != null and condition.username != ''">
-					username like concat('%',#{condition.username},'%')
+				<if test="condition.userName != null and condition.userName != ''">
+					username like concat('%',#{condition.userName},'%')
 				</if> 
 				  <if test="condition.roles != null and condition.roles.size > 0">
 					and id IN (SELECT user_id FROM user_role 

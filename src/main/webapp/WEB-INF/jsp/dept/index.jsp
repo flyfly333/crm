@@ -154,7 +154,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 	$(function(){
 		$("#deptTable").treegrid({
-			toolbar:"#tb",
+			toolbar:"#tb_dept",
 			idField:"id",
 			treeField:"text",
 			animate:true,
@@ -181,7 +181,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </tr>
     </thead>
 </table>
-<div id="tb">
+<div id="tb_dept">
 <a href="javascript:void(0)" class="easyui-linkbutton" onclick="add_dept();" data-options="iconCls:'icon-add',plain:true">添加</a>
 <a href="javascript:void(0)" class="easyui-linkbutton" onclick="edit_dept();" data-options="iconCls:'icon-edit',plain:true">修改</a>
 <a href="javascript:void(0)" class="easyui-linkbutton" onclick="delete_dept();" data-options="iconCls:'icon-remove',plain:true">删除</a>

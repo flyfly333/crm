@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</tbody>
 </table>
 	
-<div id="tb">
+<div id="tb_complain">
 <a href="javascript:void(0)" class="easyui-linkbutton" onclick = "add_complain()" data-options="iconCls:'icon-add',plain:true">添加</a>
 <a href="javascript:void(0)" class="easyui-linkbutton" onclick = "edit_complain()" data-options="iconCls:'icon-edit',plain:true">修改</a>
 <a href="javascript:void(0)" class="easyui-linkbutton" onclick = "delete_complain()" data-options="iconCls:'icon-remove',plain:true">删除</a>
@@ -248,7 +248,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				fitColumns:true,
 				iconCls:"icon-search",
 				pagination:true,
-				toolbar:"#tb",
+				toolbar:"#tb_complain",
 				idField:"id" 
 			});
 		}) 

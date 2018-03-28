@@ -160,7 +160,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 	$(function(){
 		$("#permissionTable").treegrid({
-			toolbar:"#tb",
+			toolbar:"#tb_permission",
 			idField:"id",
 			treeField:"text",
 			animate:true,
@@ -189,7 +189,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </tr>
     </thead>
 </table>
-<div id="tb">
+<div id="tb_permission">
 <a href="javascript:void(0)" class="easyui-linkbutton" onclick="add_permission();" data-options="iconCls:'icon-add',plain:true">添加</a>
 <a href="javascript:void(0)" class="easyui-linkbutton" onclick="edit_permission();" data-options="iconCls:'icon-edit',plain:true">修改</a>
 <a href="javascript:void(0)" class="easyui-linkbutton" onclick="delete_permission();" data-options="iconCls:'icon-remove',plain:true">删除</a>

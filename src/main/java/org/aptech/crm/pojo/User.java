@@ -40,7 +40,7 @@ public class User implements Serializable {
 	
 	
 
-public List<Permission> getPermissions() {
+	public List<Permission> getPermissions() {
 		return permissions;
 	}
 

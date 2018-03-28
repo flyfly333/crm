@@ -22,15 +22,22 @@
 				/** = authc
 			</value>
 		</property>
+		<property name="filters">
+			<map>
+				<entry key="authc" value-ref="myFilter"></entry>
+			</map>
+		</property>
 	</bean>
 	<!-- 安全管理器 -->
 	<bean id = "securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager" >
 		<property name="realm" ref="userRealm"></property>
+		
 	</bean>	
 	<!-- 自定义Realm -->
 	<bean id = "userRealm" class="org.aptech.crm.realms.CustomRealm">
 		<property name="userDao" ref="userDao"></property>
 		<property name="permissionDao" ref = "permissionDao"></property> 
+		<!-- 加上凭证匹配器 -->
 	</bean>
 	<!-- 自定义authc 过滤器-->
 	<bean id = "myFilter" class="org.aptech.crm.utils.MyFromAutheticationFilter"></bean>
@@ -42,8 +49,5 @@
 		<property name="hashIterations" value="1"></property>
 	</bean>
 		
-		
-		
-		
-
+		 
 </beans>

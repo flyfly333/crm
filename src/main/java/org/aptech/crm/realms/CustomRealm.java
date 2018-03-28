@@ -44,6 +44,7 @@ public class CustomRealm extends AuthorizingRealm {
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principal) {
+		System.out.println("开始授权了");
 		User user = (User)principal.getPrimaryPrincipal();
 		List<Permission> pers = permissionDao.getPersByUserId(user.getId());
 		user.setPermissions(pers);
@@ -51,6 +52,7 @@ public class CustomRealm extends AuthorizingRealm {
 		
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		for (Permission permission : pers) {
+			System.out.println(permission.getId() + ":"+permission.getPercode());
 			if (permission.getPercode() != null && permission.getPercode() != "") {
 				info.addStringPermission(permission.getPercode());
 			}
@@ -62,15 +64,22 @@ public class CustomRealm extends AuthorizingRealm {
 	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-		System.out.println("认证");
+		System.out.println("开始认证");
 		String username = (String)token.getPrincipal();
 		User user = userDao.selectByName(username);
 		if (user == null) {
 			return null;
 		}
+		System.out.println("认证完成");
+		List<Permission> pers = permissionDao.getPersByUserId(user.getId());
+		user.setPermissions(pers);
+//		for (Permission permission : pers) {
+//			System.out.println(permission.getId() + ":"+permission.getPercode());
+//			System.out.println(permission);
+//		} 
 		System.out.println(user);
 		//查询用户的权限(menu)
-		return new SimpleAuthenticationInfo(user, user.getPassword(), getName());
+		return new SimpleAuthenticationInfo(user, "123", this.getName());
 	}
 
 }

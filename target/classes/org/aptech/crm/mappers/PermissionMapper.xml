@@ -19,13 +19,12 @@
 	<!-- 权限映射 -->
 	<resultMap type="Permission" id="permissionMap">
 		<id column="id" property="id"/> 
-		<association property="per" column="parentid" select="getById2" > </association>
+		<association property="per" javaType="Permission" column="parentid" select="getById" > </association>
 		<collection property="children" javaType="java.util.List" ofType="Permission" column="id" select="getChildrenByPerId"></collection>
 	</resultMap>
-	
 	<!-- 查询某个用户的权限 -->
-	<select id="getPersByUserId" parameterType="int" resultType="Permission">
-		SELECT * FROM permission WHERE id IN (SELECT permission_id FROM role_permission WHERE role_id IN (SELECT role_id FROM user_role WHERE user_id = #{id}))	
+	<select id="getPersByUserId" parameterType="int" resultMap="permissionMap">
+		SELECT *, permission.name `text` FROM permission WHERE id IN (SELECT permission_id FROM role_permission WHERE role_id IN (SELECT role_id FROM user_role WHERE user_id = #{id}))	
 	</select>
 	
 	<select id="getChildrenByPerId"  parameterType="int" resultMap="permissionMap">
@@ -38,15 +37,15 @@
 	</select>
 	
 	<select id="getAll" resultMap="permissionMap">
-		SELECT  * , permission.name `text` FROM Permission WHERE parentid IS NULL
+		SELECT  * , permission.name `text` FROM Permission WHERE parentid IS NULL or parentid = 0
 	</select>
 	
-	<select id="getById" parameterType="int" resultMap="permissionMap">
+	<select id="getById" parameterType="int" resultType="Permission">
 		select * , permission.name `text` from Permission where id = #{id}
 	</select>
 	
 	<select id="getById2" parameterType="int" resultType="Permission">
-		select * from Permission where id = #{id}
+		select *, permission.name `text` from Permission where id = #{id}
 	</select>
 	
 	 

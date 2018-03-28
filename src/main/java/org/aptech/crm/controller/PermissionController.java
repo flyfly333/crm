@@ -37,7 +37,7 @@ public class PermissionController {
 	@RequestMapping("/all")
 	@ResponseBody
 	public List<Permission> getAll(){ 
-		List<Permission> list = permissionDao.getAll();
+		List<Permission> list = permissionDao.getAll(); 
 		Permission top = new Permission();
 		top.setText("顶级权限");
 		top.setId(0);

@@ -19,10 +19,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <tbody><tr>
             <td align="right">操作人员： </td>
              <td> <input id="logUserName"  name="user.userName" class="easyui-textbox" type="text"  class="mytext" style="width:150px;"></td>
-             <td align="right">模块名称： </td>
-            <td> <input id="logModalName" name="moduleName" class="easyui-textbox" type="text"  class="mytext" style="width:150px;"></td>
+             
              <td align="right">日志内容：  </td>
             <td><input id="logContext" name="logContext" class="easyui-textbox" type="text"  class="mytext" style="width:150px;"></td>
+             <td align="right">日志类型： </td>
+            <td>
+				<select id = "logType" class="easyui-combobox" data-options="panelHeight:50,editable:false" name="logType" style="width:100px;">   
+				    <option value="1">操作日志</option>   
+				    <option value = "0">登录日志</option>   
+				</select>  
+			</td>
              </tr>
               <tr>
              <td align="right">IP地址： </td>
@@ -46,17 +52,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<th data-options = "field:'userName',width:40,align:'center'">操作人</th>
 			<th data-options = "field:'ip',width:50,align:'center'">IP地址</th>
 			<th data-options = "field:'moduleName',width:40,align:'center'">模块名称</th>
-			<th data-options = "field:'logContext',width:250">日志内容</th>
+			<th data-options = "field:'logContext',width:250,formatter:logContextFormatter">日志内容</th>
 		</thead>
 	   <tbody>
 	</tbody>
 	</table>
 	
-<div id="tb">
+<div id="tb_log">
 <a href="javascript:void(0)" class="easyui-linkbutton" onclick = "delete_log()" data-options="iconCls:'icon-remove',plain:true">删除</a>
 <a href="javascript:void(0)" class="easyui-linkbutton" onclick = "export_log()" data-options="iconCls:'icon-sum',plain:true">导出</a>
 </div>
 <script type="text/javascript"> 
+
+	function logContextFormatter(value,row,index){
+		if (row.logType == 0) {
+			return row.user.userName + "登录了系统";
+		}else{
+			return row.logContext;
+		}
+	}
 	//自定义弹框方法
 	function alert(message){
 		$.messager.show({
@@ -114,7 +128,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			logContext:$("#logContext").val(),
 			ip:$("#logIp").val(),
 			SlogTime:$("#SlogTime").val(),
-			ElogTime:$("#ElogTime").val() 
+			ElogTime:$("#ElogTime").val(),
+			logType:$("#logType").val()
 		}; 
 			$("#logTable").datagrid("reload",data); 
 	    }
@@ -130,7 +145,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				fitColumns:true,
 				iconCls:"icon-search",
 				pagination:true,
-				toolbar:"#tb",
+				toolbar:"#tb_log",
 				idField:"id" 
 			});
 		}) 

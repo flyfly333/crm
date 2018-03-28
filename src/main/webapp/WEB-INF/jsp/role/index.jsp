@@ -16,7 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div id="roleCondition" class = "easyui-panel" title = "查询条件">
 	<form id = "roleForm1">
 		角色名称 : <input type="text" id = "name"/> 
-	    <a id="btn" href="javascript:void(0)" onclick = "setUserCondition()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
+	    <a id="btn" href="javascript:void(0)" onclick = "setRoleCondition()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
 		<a id="btn" href="javascript:void(0)" onclick = "reset()" class="easyui-linkbutton" data-options="iconCls:'icon-redo'">撤销</a>
 	</form>
 </div>
@@ -29,8 +29,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 	  </thead>
 	 </table>
 	
-<div id="tb">
-<a href="javascript:void(0)" class="easyui-linkbutton" onclick = "add_role()" data-options="iconCls:'icon-add',plain:true">添加</a>
+<div id="tb_role">
+<a href="javascript:void(0)" class="easyui-linkbutton" onclick = "add_role()" data-options="iconCls:'icon-add',plain:true">添加角色</a>
 <a href="javascript:void(0)" class="easyui-linkbutton" onclick = "edit_role()" data-options="iconCls:'icon-edit',plain:true">修改</a>
 <a href="javascript:void(0)" class="easyui-linkbutton" onclick = "delete_role()" data-options="iconCls:'icon-remove',plain:true">删除</a>
 </div>
@@ -233,7 +233,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 
 		//设置查询条件
-		function setUserCondition(){ 
+		function setRoleCondition(){ 
 			var data = {name:$("#name").val()};  
 			$("#roleTable").datagrid("reload",data); 
 	    }
@@ -254,7 +254,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				fitColumns:true,
 				iconCls:"icon-search",
 				pagination:true,
-				toolbar:"#tb",
+				toolbar:"#tb_role",
 				idField:"id" ,
 				onLoadSuccess:function (){
 					$("a.opBtn").tooltip({

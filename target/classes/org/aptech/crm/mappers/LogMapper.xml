@@ -10,8 +10,8 @@
 	</delete>
 	<!-- 添加系统日志方法 -->
 	<insert id="add" parameterType="Log" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-		INSERT INTO LOG (user_id,user_name,module_name,log_context,log_time,ip)
-			VALUES(#{user.id},#{user.userName},#{moduleName},#{logContext},#{logTime},#{ip})
+		INSERT INTO LOG (user_id,user_name,module_name,log_context,log_time,ip,log_type)
+			VALUES(#{user.id},#{user.userName},#{moduleName},#{logContext},#{logTime},#{ip},#{logType})
 	</insert>
 
 	<sql id="conditionSql">
@@ -34,6 +34,9 @@
 				</if>
 				<if test="condition.ElogTime != null and condition.ElogTime != ''">
 					and log_time &lt; #{condition.ElogTime}
+				</if>
+				<if test="condition.logType != -1">
+					and log_type = #{condition.logType}
 				</if>
 			</where>
 		</if>

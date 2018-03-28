@@ -1,17 +1,27 @@
 package org.aptech.crm.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream; 
 import javax.annotation.Resource; 
 import javax.enterprise.inject.Default;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Update;
-import org.apache.shiro.crypto.hash.Md5Hash;  
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.subject.Subject;
+import org.aptech.crm.dao.LogDao;
 import org.aptech.crm.dao.UserDao;
+import org.aptech.crm.pojo.Log;
+import org.aptech.crm.pojo.Permission;
 import org.aptech.crm.pojo.User;
+import org.aptech.crm.utils.ProjectUtils;
 import org.aptech.crm.utils.record;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod; 
@@ -27,11 +37,18 @@ public class UserController {
 	@Resource
 	private UserDao userDao;
 	
-  
+	@Resource
+	private LogDao logDao;
+	
+	
+	public void setLogDao(LogDao logDao) {
+		this.logDao = logDao;
+	}
+
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
- 
+    
 	@RequestMapping("/index")
 	public String index() {
 		return "user/index";
@@ -40,13 +57,12 @@ public class UserController {
 	@RequestMapping(value = "/login",method = RequestMethod.POST)
 	public String login() {
 		System.out.println("认证没通过吧！");
-		return "main/main";
+		return "redirect:/user/login";
 	}
 	
 	@RequestMapping(value = "/login",method = RequestMethod.GET)
 	public String login2() {
-		System.out.println("认证了啊");
-		return "main/login";
+		return "login";
 	}
 	
 	@RequestMapping("/getUserById")
@@ -86,7 +102,26 @@ public class UserController {
 	}
 	
 	@RequestMapping("/main")
-	public String main() {
+	public String main(HttpServletRequest request,HttpSession session) {
+		Subject subject = SecurityUtils.getSubject();
+		User user = (User)subject.getPrincipal();
+		//ip地址
+		String ip = ProjectUtils.getIP(request);
+		//日志内容 
+		Log log = new Log();
+		log.setIp(ip); 
+		log.setLogTime(new Date());
+		log.setUser(user); 
+		log.setModuleName("登录");
+		log.setLogType(0);
+		logDao.add(log);
+		System.out.println("====添加登录日志成功====");
+				 
+		session.setAttribute("login_user", user);
+//		for (Permission permission : user.getPermissions()) {
+//			System.out.println("id" + permission.getId() + ":" +permission.getPercode());
+//			System.out.println(permission);
+//		}
 		return "main/main";
 	}
 	
@@ -94,8 +129,7 @@ public class UserController {
 	@ResponseBody
 	@record(actionType = "执行了查询操作",businessLogic="查询的是用户列表")
 	public Map<String,Object> getListByCondition(@RequestParam(defaultValue="1")Integer page,@RequestParam(defaultValue="10")Integer rows,User user,@RequestParam(defaultValue="id")String sort,@RequestParam(defaultValue = "asc")String order){
-		System.out.println(user.getUserName());
-		System.out.println();
+		System.out.println("用户名：" + user.getUserName());
 		int start = (page - 1)*rows;
 		Map<String,Object> map = new HashMap<>();
 		System.out.println("数量为："  + userDao.getCount());

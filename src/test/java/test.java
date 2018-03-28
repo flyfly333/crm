@@ -1,5 +1,7 @@
 import static org.junit.Assert.*;
 
+import java.sql.Time;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -33,7 +35,16 @@ public class test {
 	public void test() {
 		Md5Hash md5 = new Md5Hash("123456","qwe",2);
 		System.out.println(md5.toString());
-//		Log log = new Log();
+		
+		Calendar calendar = Calendar.getInstance();
+		Long long1 = calendar.getTimeInMillis();
+		System.out.println("毫秒数" + long1);
+		calendar.add(calendar.DATE, -1);
+		System.out.println(calendar.getTime());
+		//calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(calendar.DAY_OF_MONTH));
+
+		System.out.println("最后一天 " + calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+		//		Log log = new Log();
 //		User user = new User();
 //		user.setId(1);
 //		user.setUserName("miaomiaomiao");

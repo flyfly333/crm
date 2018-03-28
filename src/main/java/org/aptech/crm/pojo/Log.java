@@ -19,6 +19,8 @@ public class Log implements Serializable {
 	@DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
 	private Date logTime;		//操作时间
 	
+	private int logType = 1;        //日志类型 1:登录 0操作
+	
 	private String logContext;		//日志内容
 	
 	private String moduleName;	//模块名称
@@ -32,6 +34,16 @@ public class Log implements Serializable {
 	private String userName;            //操作人账号
 	
 	 
+	
+	
+	public int getLogType() {
+		return logType;
+	}
+
+	public void setLogType(int logType) {
+		this.logType = logType;
+	}
+
 	public String getUserName() {
 		return userName;
 	}
@@ -125,10 +137,12 @@ public class Log implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Log [id=" + id + ", user=" + user + ", ip=" + ip + ", logTime=" + logTime + ", logContext=" + logContext
-				+ ", moduleName=" + moduleName + ", accessories=" + accessories + ", SlogTime=" + SlogTime
-				+ ", ElogTime=" + ElogTime + "]";
+		return "Log [id=" + id + ", user=" + user + ", ip=" + ip + ", logTime=" + logTime + ", logType=" + logType
+				+ ", logContext=" + logContext + ", moduleName=" + moduleName + ", accessories=" + accessories
+				+ ", SlogTime=" + SlogTime + ", ElogTime=" + ElogTime + ", userName=" + userName + "]";
 	}
+
+	
 
 	
 

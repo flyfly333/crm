@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 	  </thead>
 	 </table>
 	
-<div id="tb">
+<div id="tb_post">
 <a href="javascript:void(0)" class="easyui-linkbutton" onclick = "add_post()" data-options="iconCls:'icon-add',plain:true">添加</a>
 <a href="javascript:void(0)" class="easyui-linkbutton" onclick = "edit_post()" data-options="iconCls:'icon-edit',plain:true">修改</a>
 <a href="javascript:void(0)" class="easyui-linkbutton" onclick = "delete_post()" data-options="iconCls:'icon-remove',plain:true">删除</a>
@@ -195,7 +195,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				fitColumns:true,
 				iconCls:"icon-more",
 				pagination:true,
-				toolbar:"#tb",
+				toolbar:"#tb_question",
 				idField:"id" 
 				 
 			});
