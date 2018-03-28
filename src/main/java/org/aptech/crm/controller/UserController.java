@@ -103,21 +103,26 @@ public class UserController {
 	
 	@RequestMapping("/main")
 	public String main(HttpServletRequest request,HttpSession session) {
-		Subject subject = SecurityUtils.getSubject();
-		User user = (User)subject.getPrincipal();
-		//ip地址
-		String ip = ProjectUtils.getIP(request);
-		//日志内容 
-		Log log = new Log();
-		log.setIp(ip); 
-		log.setLogTime(new Date());
-		log.setUser(user); 
-		log.setModuleName("登录");
-		log.setLogType(0);
-		logDao.add(log);
-		System.out.println("====添加登录日志成功====");
+		
+		User login_user = (User) session.getAttribute("login_user");
+		if (login_user == null) {
+			Subject subject = SecurityUtils.getSubject();
+			User user = (User)subject.getPrincipal();
+			//ip地址
+			String ip = ProjectUtils.getIP(request);
+			//日志内容 
+			Log log = new Log();
+			log.setIp(ip); 
+			log.setLogTime(new Date());
+			log.setUser(user); 
+			log.setModuleName("登录");
+			log.setLogType(0);
+			logDao.add(log);
+			System.out.println("====添加登录日志成功====");
+			session.setAttribute("login_user", user);
+		}
 				 
-		session.setAttribute("login_user", user);
+		
 //		for (Permission permission : user.getPermissions()) {
 //			System.out.println("id" + permission.getId() + ":" +permission.getPercode());
 //			System.out.println(permission);
