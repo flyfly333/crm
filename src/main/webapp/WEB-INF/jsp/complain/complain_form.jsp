@@ -20,7 +20,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		<div class = "item">
 			<input type="hidden" value="0" name = "id"/>
-			 <span>投诉主题:  </span><input type="text" class="easyui-textbox" name = "compTheme" style = "width: 220px" />
+			 <span>投诉主题:  </span>
+			 <input type="text" class="easyui-textbox" name = "compTheme" style = "width: 220px" />
 		</div>
 		
 		<div class = "item">

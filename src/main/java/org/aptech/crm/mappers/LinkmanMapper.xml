@@ -30,11 +30,20 @@
 		select * from linkman where id = #{id}
 	</select>
 	
+	<select id="getById2" parameterType="int" resultType="Linkman">
+		select * from linkman where id = #{id}
+	</select>
+	
 	<select id="getListByCondition" resultMap="linkmanMap">
 		select * from linkman
 			<include refid="conditionSql"></include>
 		order by ${column} ${orderBy}
 			limit #{start},#{limit}
+	</select>
+	
+	<!-- 获取全部联系人的方法 不要删了 -->
+	<select id="getAll" resultType="org.aptech.crm.pojo.Linkman">
+		select * from linkman 
 	</select>
 	
 	<!-- 最后一个参数给了一个固定值，后面改回来 -->

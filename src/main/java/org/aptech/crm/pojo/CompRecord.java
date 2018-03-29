@@ -3,6 +3,14 @@ package org.aptech.crm.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.alibaba.fastjson.annotation.JSONField;
+/**
+ * 服务记录表
+ * @author Miao  Long
+ *
+ */
 public class CompRecord implements Serializable {
 	private Integer id;		//客服记录编号
 	
@@ -16,8 +24,12 @@ public class CompRecord implements Serializable {
 	
 	private String serContext;	//服务内容
 	
+	@JSONField(format="yyyy-MM-dd hh:mm:ss")
+	@DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
 	private Date sTime;		//开始时间
 	
+	@JSONField(format="yyyy-MM-dd hh:mm:ss")
+	@DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
 	private Date eTime;		//结束时间
 	
 	private Linkman linkman;	//客户联系人实体类

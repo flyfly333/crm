@@ -13,6 +13,7 @@ F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\Permission.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\Log.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\controller\RoleController.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\Role.java
+F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\controller\CompRecordController.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\dao\RoleDao.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\controller\LogController.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\dao\QuestionDao.java
@@ -25,6 +26,7 @@ F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\utils\InitListener.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\utils\ProjectUtils.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\controller\PostController.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\utils\record.java
+F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\dao\CompRecordDao.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\dao\CustomDao.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\controller\DeptController.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\Diction.java

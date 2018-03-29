@@ -12,12 +12,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<title>CRM客户关系管理系统</title>
 	 <jsp:include page="/commont.jsp"></jsp:include>
 	 <script type="text/javascript">
-	 	function addTag(url,title){ 
+	 	function addTag(url,title){
+	 		console.log(url);
+	 		console.log(title);
 	 		var tabs = $("#tabs");
 	 		if (!tabs.tabs('exists',title)) { 
 		 		tabs.tabs('add',{
 		 			title:title,
-		 			href:url,
+		 			href:"comprecord/index",
 		 			fit:true,
 		 			closable:true,
 		 			iconCls:'icon-search'
@@ -53,9 +55,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div data-options="region:'center' " style=" background:#eee;">
     	<div id="tabs" class="easyui-tabs" style="width:500px;height:250px;" data-options = "fit:true">   
 		    <div title="主页" style="padding:20px;display:none;">   
-		        	主页   
+		                        主页   
 		    </div>   
-		        
 	   </div>  
     </div>   
 </body>  

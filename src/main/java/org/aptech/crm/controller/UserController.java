@@ -101,6 +101,12 @@ public class UserController {
 		return "user/user_form";
 	}
 	
+	@RequestMapping("/getAll")
+	@ResponseBody
+	public List<User> getAll() {
+		return userDao.getAll();
+	}
+	
 	@RequestMapping("/main")
 	public String main(HttpServletRequest request,HttpSession session) {
 		

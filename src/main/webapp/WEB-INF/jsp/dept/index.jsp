@@ -11,6 +11,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta charset="UTF-8">
 	<title>部门列表</title>
 	<jsp:include page="/commont.jsp"></jsp:include>
+</head>
+<body>
 	<script type="text/javascript">
 	//删除部门
 	function delete_dept(){
@@ -167,8 +169,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		});
 	});
 </script>
-</head>
-<body>
+
 	<table id="deptTable"  title="dept List"
         data-options="url:'dept/list2',fitColumns:true,striped:true,iconCls:'icon-search'">
     <thead>

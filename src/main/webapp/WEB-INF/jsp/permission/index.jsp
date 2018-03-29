@@ -11,6 +11,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta charset="UTF-8">
 	<title>权限列表</title>
 	<jsp:include page="/commont.jsp"></jsp:include>
+</head>
+<body>
 	<script type="text/javascript">
 	//删除权限
 	function delete_permission(){
@@ -176,8 +178,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		});
 	});
 </script>
-</head>
-<body>
+
 	<table id="permissionTable"  title="Permission List"
         data-options="url:'permission/list',fitColumns:true,striped:true,iconCls:'icon-search'">
     <thead>

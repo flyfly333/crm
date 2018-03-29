@@ -66,6 +66,11 @@
 	 	 limit #{start} , #{limit}
 	 </select>
 	 
+	  <select id="getAll" resultType="User">
+	 	 SELECT id,username,user_code,salt,PASSWORD,sex,dept_id,post_id,phone,birthday,rntry_time,locked 
+	 	 from user  
+	 </select>
+	 
 	 <!-- 修改用户 -->
 	 <update id="update" parameterType="User"> 
 			UPDATE USER SET username = #{userName},user_code = #{userCode},PASSWORD = #{password},salt = #{salt},sex = #{sex},dept_id = #{dept.id},post_id = #{post.id},phone = #{phone},birthday=#{birthday},rntry_time=#{rntryTime}, locked = #{locked} 
