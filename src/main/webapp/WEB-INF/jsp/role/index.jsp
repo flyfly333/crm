@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<form id = "roleForm1">
 		角色名称 : <input type="text" id = "name"/> 
 	    <a id="btn" href="javascript:void(0)" onclick = "setRoleCondition()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
-		<a id="btn" href="javascript:void(0)" onclick = "reset()" class="easyui-linkbutton" data-options="iconCls:'icon-redo'">撤销</a>
+		<a id="btn" href="javascript:void(0)" onclick = "resetRoleCondition()" class="easyui-linkbutton" data-options="iconCls:'icon-redo'">撤销</a>
 	</form>
 </div>
 	 <table id = "roleTable" >
@@ -228,7 +228,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}); 
 		}
 		//撤销条件点击事件
-		function reset(){
+		function resetRoleCondition(){
 			$("#roleForm1").form("clear");
 		}
 

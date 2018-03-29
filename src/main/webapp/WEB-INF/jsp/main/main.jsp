@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 		if (!tabs.tabs('exists',title)) { 
 		 		tabs.tabs('add',{
 		 			title:title,
-		 			href:"comprecord/index",
+		 			href:url,
 		 			fit:true,
 		 			closable:true,
 		 			iconCls:'icon-search'

@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		&nbsp;&nbsp;&nbsp;时间&nbsp;&nbsp;<input  id="Sdata" name = "compTime"  type= "text" class= "easyui-datebox"  data-options="editable:false"> </input>
 		&nbsp;&nbsp;到&nbsp;&nbsp;<input  id="Edata" name = "compTime"  type= "text" class= "easyui-datebox"  data-options="editable:false"> </input>
 	    <a id="btn" href="javascript:void(0)" onclick = "setComplainCondition()" class="easyui-linkbutton" data-options="iconCls:'icon-sum'">查询</a>
-		<a id="btn" href="javascript:void(0)" onclick = "reset()" class="easyui-linkbutton" data-options="iconCls:'icon-redo'">撤销</a>
+		<a id="btn" href="javascript:void(0)" onclick = "resetComplainCondition()" class="easyui-linkbutton" data-options="iconCls:'icon-redo'">撤销</a>
 	</form>
 </div>
 	<table id = "complainTable" title="投诉列表">
@@ -226,7 +226,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		
 		//撤销条件点击事件
-		function reset(){
+		function resetComplainCondition(){
 			$("#complainForm").form("clear");
 		}
 

@@ -16,8 +16,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div id="postCondition" class = "easyui-panel" title = "查询条件">
 	<form id = "postForm1">
 		职位名称 : <input type="text" id = "postName"/> 
-	    <a id="btn" href="javascript:void(0)" onclick = "setUserCondition()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
-		<a id="btn" href="javascript:void(0)" onclick = "reset()" class="easyui-linkbutton" data-options="iconCls:'icon-redo'">撤销</a>
+	    <a id="btn" href="javascript:void(0)" onclick = "setPostCondition()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
+		<a id="btn" href="javascript:void(0)" onclick = "resetPostCondition()" class="easyui-linkbutton" data-options="iconCls:'icon-redo'">撤销</a>
 	</form>
 </div>
 	 <table id = "postTable" >
@@ -173,12 +173,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}); 
 		}
 		//撤销条件点击事件
-		function reset(){
+		function resetPostCondition(){
 			$("#postForm1").form("clear");
 		}
 
 		//设置查询条件
-		function setUserCondition(){ 
+		function setPostCondition(){ 
 			var data = {name:$("#name").val()};  
 			$("#postTable").datagrid("reload",data); 
 	    }

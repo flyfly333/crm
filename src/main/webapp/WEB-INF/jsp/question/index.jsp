@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</select>  
 
 	    <a id="btn" href="javascript:void(0)" onclick = "setQuestionCondition()" class="easyui-linkbutton" data-options="iconCls:'icon-sum'">查询</a>
-		<a id="btn" href="javascript:void(0)" onclick = "reset()" class="easyui-linkbutton" data-options="iconCls:'icon-redo'">撤销</a>
+		<a id="btn" href="javascript:void(0)" onclick = "resetQuestionCondition()" class="easyui-linkbutton" data-options="iconCls:'icon-redo'">撤销</a>
 	</form>
 </div>
 	<table id = "questionTable" title="问题列表">
@@ -217,7 +217,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		
 		//撤销条件点击事件
-		function reset(){
+		function resetQuestionCondition(){
 			$("#questionForm2").form("clear");
 		}
 

@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               	   <input  id="SlogTime" name = "compTime"  type= "text" class= "easyui-datebox"  data-options="editable:false,width:148"> </input>
 				  &nbsp;&nbsp;到&nbsp;&nbsp;<input  id="ElogTime" name = "ElogTime"  type= "text" class= "easyui-datebox"  data-options="editable:false,width:148"> </input>
 	              <a id="btn" href="javascript:void(0)" onclick = "setLogCondition()" class="easyui-linkbutton" data-options="iconCls:'icon-sum'">查询</a>
-				  <a id="btn" href="javascript:void(0)" onclick = "reset()" class="easyui-linkbutton" data-options="iconCls:'icon-redo'">撤销</a>
+				  <a id="btn" href="javascript:void(0)" onclick = "resetLogCondition()" class="easyui-linkbutton" data-options="iconCls:'icon-redo'">撤销</a>
 	 		 </td>
              </tr>
         </tbody></table>                
@@ -115,7 +115,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		
 		//撤销条件点击事件
-		function reset(){
+		function resetLogCondition(){
 			$("#logForm").form("clear");
 		}
 

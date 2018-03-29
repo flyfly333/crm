@@ -14,13 +14,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 <div id="condition" class = "easyui-panel" title = "查询条件">
-	<form id = "form1">
+	<form id = "userForm1">
 		UserName : <input type="text" id = "username"/>
 		Roles:
 		<input id="roles"  name="dept"
 	    data-options="valueField:'id',textField:'name',url:'role/all',panelHeight:'auto',multiple:true">
 	    <a id="btn" href="javascript:void(0)" onclick = "setUserCondition()" class="easyui-linkbutton" data-options="iconCls:'icon-sum'">查询</a>
-		<a id="btn" href="javascript:void(0)" onclick = "reset()" class="easyui-linkbutton" data-options="iconCls:'icon-redo'">撤销</a>
+		<a id="btn" href="javascript:void(0)" onclick = "resetUserCondition()" class="easyui-linkbutton" data-options="iconCls:'icon-redo'">撤销</a>
 	</form>
 </div>
 	<table id = "dataGrid" title="用户列表">
@@ -235,8 +235,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		
 		//撤销条件点击事件
-		function reset(){
-			$("#form1").form("clear");
+		function resetUserCondition(){
+			$("#userForm1").form("clear");
 		}
 
 		//设置查询条件

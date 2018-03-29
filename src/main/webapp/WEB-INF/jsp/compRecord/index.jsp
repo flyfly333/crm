@@ -14,6 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 <div id="compRecordCondition" class = "easyui-panel" title = "查询条件">
+<form id = "comRecordForm" action="">
 		<table cellspacing="0" cellpadding="0" width="100%" border="0"
 			class="form">
 			<tbody>
@@ -44,12 +45,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					 <input  id="Qstime"  type= "text" class= "easyui-datetimebox"  data-options="editable:false" style = "width: 220px"> </input> 至  
 					 <input  id="Qetime"  type= "text" class= "easyui-datetimebox"  data-options="editable:false" style = "width: 220px"> </input>
 					 <a id="btn" href="javascript:void(0)" onclick = "setComplainCondition()" class="easyui-linkbutton" data-options="iconCls:'icon-sum'">查询</a>
-					 <a id="btn" href="javascript:void(0)" onclick = "reset()" class="easyui-linkbutton" data-options="iconCls:'icon-redo'">撤销</a>
+					 <a id="btn" href="javascript:void(0)" onclick = "resetCompRecordCondition()" class="easyui-linkbutton" data-options="iconCls:'icon-redo'">撤销</a>
 					</td>
 				</tr>
 			</tbody>
 </table>
-
+</form>
 
 		
 
@@ -277,8 +278,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		
 		//撤销条件点击事件
-		function reset(){
-			$("#comprecordForm").form("clear");
+		function resetCompRecordCondition(){
+			$("#comRecordForm").form("clear");
 		}
 
 		
