@@ -4,7 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.alibaba.fastjson.annotation.JSONField;
-
+/**
+ * 投诉实体类
+ * @author Miao  Long
+ *
+ */
 public class Complain implements Serializable {
 	
 	private Integer id;		//投诉编号

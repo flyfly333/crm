@@ -41,6 +41,7 @@ F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\User.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\Linkman.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\controller\PermissionController.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\dao\PostDao.java
+F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\dao\ContactRecordDao.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\controller\ComplainController.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\utils\LogInterceptor.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\CustomCare.java
@@ -49,6 +50,7 @@ F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\controller\UserController.
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\dao\AddressDao.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\dao\ComplainDao.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\pojo\TalkComment.java
+F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\controller\ContactRecordController.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\dao\CommonDao.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\controller\AddressController.java
 F:\eclipse-workspace\crm\src\main\java\org\aptech\crm\controller\LinkmanController.java

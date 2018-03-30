@@ -44,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td colspan="4">
 					 <input  id="Qstime"  type= "text" class= "easyui-datetimebox"  data-options="editable:false" style = "width: 220px"> </input> 至  
 					 <input  id="Qetime"  type= "text" class= "easyui-datetimebox"  data-options="editable:false" style = "width: 220px"> </input>
-					 <a id="btn" href="javascript:void(0)" onclick = "setComplainCondition()" class="easyui-linkbutton" data-options="iconCls:'icon-sum'">查询</a>
+					 <a id="btn" href="javascript:void(0)" onclick = "setCompRecordCondition()" class="easyui-linkbutton" data-options="iconCls:'icon-sum'">查询</a>
 					 <a id="btn" href="javascript:void(0)" onclick = "resetCompRecordCondition()" class="easyui-linkbutton" data-options="iconCls:'icon-redo'">撤销</a>
 					</td>
 				</tr>
@@ -79,7 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 
 	//设置查询条件
-	function setComplainCondition(){ 
+	function setCompRecordCondition(){ 
 	console.log($("#compRecordCondition #Qstime").val());
 		var data = {serTheme:$("#compRecordCondition #serTheme").val(),
 				 sTime:$("#compRecordCondition #Qstime").val(),

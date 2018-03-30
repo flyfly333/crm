@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.aptech.crm.dao.ContactRecordDao">
+	<insert id="add" parameterType="org.aptech.crm.pojo.ContactRecord"
+		useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		insert into Contact_Record(id,custom_id,contact_theme,linkman_name,contact_desc,contact_time,create_user_id,contact_Type)
+			values(  #{id},  #{custom.id},  #{contactTheme},  #{linkmanName},  #{contactDesc},  #{customTime}, 1, #{contactType})
+	</insert>
+	
+	<update id="update" parameterType="org.aptech.crm.pojo.ContactRecord">
+		update Contact_Record set  custom_id = #{custom.id},contact_theme = #{contactTheme},contact_type = #{contactType},linkman_name = #{linkmanName},contact_desc = #{contactDesc},contact_time = #{contactTime}
+			where id = #{id}
+	</update>
+	
+	<delete id="deleteByIds" parameterType="java.lang.reflect.Array">
+		delete from Contact_Record where id in
+		<foreach collection="array" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+
+	<sql id="conditionSql">
+		<if test="condition != null">
+			<where>
+				<if test="condition.custom != null and condition.custom.id > 0">
+					and custom_id = #{condition.custom.id}
+				</if>
+				<if test="condition.contactTheme != null and condition.contactTheme != ''">
+					and contact_theme like concat('%',#{condition.contactTheme},'%')
+				</if>
+				<if test="condition.sTime != null and condition.sTime != '' ">
+					and contact_time &gt; #{condition.sTime}
+				</if>
+				<if test="condition.eTime != null and condition.eTime != '' ">
+					and contact_time &lt; #{condition.eTime}
+				</if>
+			</where>
+		</if>
+	</sql>
+	
+	 
+	
+	<select id="getById" parameterType="int" resultMap="contactRecordMap">
+		select * from Contact_Record where id = #{id}
+	</select>
+	
+	<resultMap type="ContactRecord" id="contactRecordMap" autoMapping="true">
+		<id column="id" property="id"/>
+		<association property="user" column="create_user_id" select="org.aptech.crm.dao.UserDao.getById2"></association>
+		<association property="custom" column="custom_id" select="org.aptech.crm.dao.CustomDao.getById2"></association>
+	</resultMap>
+	
+	<select id="getListByCondition" resultMap="contactRecordMap">
+		select * from Contact_Record
+		<include refid="conditionSql"></include>
+		order by ${column} ${orderBy}
+		limit #{start},#{limit}
+	</select>
+	<select id="getCountByCondition" resultType="int">
+		select count(1) from Contact_Record
+		<include refid="conditionSql"></include>
+	</select>
+</mapper>
